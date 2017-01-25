@@ -1,0 +1,16 @@
+/* insert companies data */
+--@X:\Databases_2\csy2038\InsertCourseCompanies_52.txt
+INSERT INTO companies (company_id, company_name, city, industry, no_employees, revenue, training_budget)
+VALUES (10, 'USCABLES', 'WASHINGTON', 'MANUFACTURING', 250, 4000000, 50000.00);
+INSERT INTO companies (company_id, company_name, city, industry, no_employees, revenue, training_budget)
+VALUES (20, 'KODAK', 'HOUSTON', 'MANUFACTURING', 2500, 10000000, 100000.00);
+INSERT INTO companies (company_id, company_name, city, industry, no_employees, revenue, training_budget)
+VALUES (30, 'KLM', 'AMSTERDAM', 'SERVICE', 5000, 11000000, 990000.00);
+INSERT INTO companies (company_id, company_name, city, industry, no_employees, revenue, training_budget)
+VALUES (40, 'HAMBRO', 'LONDON', 'SERVICE', 2000, 6000000, 500000.00);
+INSERT INTO companies (company_id, company_name, city, industry, no_employees, revenue, training_budget)
+VALUES (50, 'FORD', 'DETROIT', 'MANUFACTURING', 8000, 20000000, 100000.00);
+INSERT INTO companies (company_id, company_name, city, industry, no_employees, revenue, training_budget)
+VALUES (60, 'CITYBANK', 'BOSTON', 'FINANCE', 3000, 5000000, 200000.00);
+INSERT INTO companies (company_id, company_name, city, industry, no_employees, revenue, training_budget)
+VALUES (70, 'DISNEY', 'ORLANDO', 'ARTS', 2500, 10000000, 300000.00);

@@ -1,0 +1,67 @@
+SET SERVEROUTPUT ON
+
+-----------Function for working out remaining time till retirement-------------------------------
+
+CREATE OR REPLACE FUNCTION retire_time(in_staff_dob staff.date_of_birth%TYPE)
+RETURN NUMBER IS
+	vn_time_left NUMBER(5);
+	
+BEGIN
+	
+	vn_time_left := 67 - FLOOR(MONTHS_BETWEEN(sysdate,to_date(in_staff_dob))/12);
+	
+RETURN vn_time_left;
+
+END retire_time;
+/
+SHOW ERRORS;
+
+--------------Trigger to show staff on insert-------------
+
+CREATE OR REPLACE TRIGGER show_staff_trig
+AFTER INSERT OR UPDATE OR DELETE ON staff
+FOR EACH ROW
+BEGIN
+	IF INSERTING THEN
+		
+		DBMS_OUTPUT.PUT_LINE('Review ID: ' || :NEW.review_id);
+		DBMS_OUTPUT.PUT_LINE('Venue: ' || :NEW.surname);
+		DBMS_OUTPUT.PUT_LINE('ID: ' || :NEW.staff_id);
+		DBMS_OUTPUT.PUT_LINE('Role: ' || :NEW.role);
+		DBMS_OUTPUT.PUT_LINE('DOB: ' || :NEW.date_of_birth);
+	ELSIF UPDATING THEN
+		DBMS_OUTPUT.PUT_LINE('Remaining Time: ' || retire_time(:NEW.date_of_birth));
+	ELSE
+		DBMS_OUTPUT.PUT_LINE(' You are deleting' || :OLD.firstname || ' ' || :OLD.surname);
+	END IF;
+END show_staff_trig;
+/
+SHOW ERRORS;
+-----------Procedure for allowing staff to input id and see how long left till retirement--------
+
+CREATE OR REPLACE PROCEDURE time_till_retirement (in_staff_id staff.staff_id%TYPE) IS
+	vn_timeleft NUMBER(5);
+	vd_staff_dob DATE;
+	
+BEGIN
+	SELECT date_of_birth 
+	INTO vd_staff_dob
+	FROM staff
+	WHERE staff_id = in_staff_id;
+	
+	vn_timeleft := retire_time(vd_staff_dob);
+	DBMS_OUTPUT.PUT_LINE('You have ' || vn_timeleft || ' Years till retirement');
+	
+END time_till_retirement;
+/
+SHOW ERRORS;
+
+EXECUTE time_till_retirement(1005);
+
+INSERT INTO staff VALUES (1005, 'HELLO','TEST', NULL,'SLAVE','12-JUN-1980');
+
+UPDATE staff 
+SET firstname = 'TEST2', surname = 'TEST2', role = 'TESTBOT'
+WHERE staff_id = 1005;
+
+DELETE FROM staff WHERE staff_id = 1005;

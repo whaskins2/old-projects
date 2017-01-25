@@ -1,0 +1,22 @@
+SET SERVEROUTPUT ON
+
+----------------New Trigger--------------------------
+
+CREATE OR REPLACE TRIGGER trig_dob_ck
+BEFORE INSERT OR UPDATE OF date_of_birth ON students
+FOR EACH ROW
+WHEN (NEW.date_of_birth > SYSDATE)
+
+BEGIN
+RAISE_APPLICATION_ERROR(-20000, 'ERROR - THIS STUDENT WAS BORN AFTER TODAY, AMEND STUDENT DATE OF BIRTH!');
+END trig_dob_ck;
+/
+
+--------------Insert to trigger the trigger--------------
+
+INSERT INTO students (student_id, student_firstname, date_of_birth)
+VALUES (999999, 'JOHN', TO_DATE('2017-12-09','YYYY-MM-DD'));
+
+----------------Drop Trigger-------------------------
+
+DROP TRIGGER trig_dob_ck;

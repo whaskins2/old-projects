@@ -1,0 +1,34 @@
+--@C:/functions.txt
+-----------------------------------------------------------
+--Functions---------------------------------------------
+
+SET SERVEROUTPUT ON;
+
+--Works out the range of Date using Sysdate
+CREATE OR REPLACE FUNCTION func_date_ct
+(in_date DATE) RETURN NUMBER IS
+	vn_date_diff NUMBER(4);
+BEGIN
+	SELECT to_date(sysdate) - to_date(in_date) 
+	INTO vn_date_diff
+	FROM dual;
+	RETURN vn_date_diff;
+END func_date_ct;
+/
+
+--Determine average rating for the venue
+CREATE OR REPLACE FUNCTION func_avg_rating
+(in_venue_name venues.name%TYPE) RETURN NUMBER IS
+	vn_average NUMBER(1);
+	vn_venue_id NUMBER(5);
+BEGIN
+	SELECT AVG(r.rating)
+	INTO vn_average
+	FROM venues v
+	INNER JOIN reviews r
+	ON v.venue_id=r.venue_id;
+	
+	RETURN vn_average;
+	
+END func_avg_rating;
+/

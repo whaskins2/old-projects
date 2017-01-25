@@ -1,0 +1,45 @@
+SELECT student_surname, company_id
+FROM students
+WHERE company_id IN(
+	SELECT company_id
+	FROM companies
+	WHERE city = 'AMSTERDAM');
+
+//All USA cities where there are sites AND instructors
+
+SELECT s.address.city
+FROM  sites s
+WHERE s.address.city IN(
+	SELECT i.address.city
+	FROM instructors i
+	WHERE i.address.country = 'USA');
+
+//All addresses that are NOT IN the instructors table
+
+SELECT s.address.street, s.address.city, s.address.country
+FROM sites s
+WHERE s.address.street NOT IN(
+	SELECT i.address.street
+	FROM instructors i);
+
+//The addresses that are not in the instructors AND students tables 
+
+SELECT s.address.street, s.address.city, s.address.country
+FROM sites s
+WHERE s.address.street NOT IN(
+	SELECT i.address.street
+	FROM instructors i)
+AND s.address.street NOT IN(
+	SELECT st.address.street
+	FROM students st);
+
+//All instructors who earn more than their mentors
+
+SELECT i.instructor_id, i.instructor_name, i.mentor_id, i.salary
+FROM instructors i
+WHERE EXISTS(
+	SELECT m.instructor_id
+	FROM instructors m
+	WHERE mentor_id IS NOT NULL
+	AND i.mentor_id = m.instructor_id
+	AND i.salary > m.salary);

@@ -1,0 +1,56 @@
+-- allows server outputs, wont see anything without this
+SET SERVEROUTPUT ON
+
+CREATE SEQUENCE seq_company_id
+INCREMENT BY 2
+START WITH 90;
+
+procedure to add a company to the companies table
+CREATE OR REPLACE PROCEDURE proc_add_company IS
+	vc_company_name  companies.company_name%TYPE:= 'NEW COMPANY';
+BEGIN
+	INSERT INTO companies (company_id, company_name)
+	VALUES (seq_company_id.NEXTVAL, vc_company_name);
+END proc_add_company;
+/
+EXECUTE proc_add_company;
+
+--procedure to delete last company added
+CREATE OR REPLACE PROCEDURE proc_delete_company IS
+	vn_company_id companies.company_id%TYPE;
+BEGIN
+	SELECT seq_company_id.currval
+	INTO vn_company_id
+	FROM dual;
+	
+	DELETE FROM companies
+	WHERE company_id = vn_company_id;
+END	proc_delete_company;
+/
+
+EXECUTE proc_delete_company;
+
+--procedure to delete by company id
+CREATE OR REPLACE PROCEDURE proc_param_del_co (in_company_id companies.company_id%TYPE)IS
+BEGIN
+	DELETE FROM companies
+	WHERE company_id = in_company_id;
+END	proc_param_del_co;
+/
+
+EXECUTE proc_param_del_co(170);
+
+CREATE OR REPLACE PROCEDURE bonusone (vc_firstname VARCHAR2) IS
+	vn_length NUMBER:= LENGTH(vc_firstname);
+	vn_counter NUMBER(10) := 1;
+BEGIN
+	DBMS_OUTPUT.PUT_LINE('-----------FIRSTNAME-----------');
+	LOOP
+		EXIT WHEN vn_counter > vn_length;
+		DBMS_OUTPUT.PUT_LINE(SUBSTR(vc_firstname, vn_counter, 1));
+		vn_counter := vn_counter + 1;
+	END LOOP;
+END bonusone;
+/
+
+EXECUTE bonusone('WARREN');

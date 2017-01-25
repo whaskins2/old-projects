@@ -1,0 +1,262 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Warren's Website</title>
+		<link rel="stylesheet" type="text/css" href="styles/styling.css" />
+	</head>
+	<body>
+		<div id="container">
+			<header>
+				<h3>Usability and Accessibility Quiz</h3>
+			</header>
+			<div id="content">
+				<div id="walloftext">
+					<h1 class="contentheader" id="qNumberTitle">Welcome to the Usability and Accessibility Quiz</h1>
+					<div class="contentheader" id="qGoesHere">The quiz contains ten questions, some multiple choice. Each correctly answered question is worth one point.</div><br>
+					<br><br>
+					<form name="qForm">
+					<div id="intro">
+						Press Start to begin.<br><br>
+					</div>
+					<div class="questions" id="qOne">
+						<input type="radio" id = "r1" name="radio1">Leave it as it is.</input><br><br>
+						<input type="radio" id = "r2" name="radio1">Trim away excess information so only the key information remains.</input><br><br>
+						<input type="radio" id = "r3" name="radio1">Break down the information into smaller groups with appropriate subheadings where relevant.</input><br><br>
+						<input type="radio" id = "r4" name="radio1">Move each paragraph onto its own web page.</input><br><br>
+					</div>
+					<div class="questions" id="qTwo">
+						<input type="radio" id = "r1" name="radio2">Yes, relevant illustrations can help those that struggle with text alone.</input><br><br>
+						<input type="radio" id = "r2" name="radio2">No, illustrations are a distraction from the information in the text.</input><br><br>
+						<input type="radio" id = "r3" name="radio2">Yes, filling the page with images can brighten the page up.</input><br><br>
+						<input type="radio" id = "r4" name="radio2">No, images make the page take too long to load and are not worth the effort.</input><br><br>
+					</div>
+					<div class="questions" id="qThree">
+						<input type="radio" id = "r1" name="radio3">A soundtrack to make your site more pleasant to visit.</input><br><br>
+						<input type="radio" id = "r2" name="radio3">Nothing.</input><br><br>
+						<input type="radio" id = "r3" name="radio3">Extra images to make your site really stand out.</input><br><br>
+						<input type="radio" id = "r4" name="radio3">A supplemental text counterpart to any information found in the images.</input><br><br>
+					</div>
+					<div class="questions" id="qFour">
+						<input type="radio" id = "r1" name="radio4">You shouldn't worry about keyboard input, everyone has a mouse anyway.</input><br><br>
+						<input type="radio" id = "r2" name="radio4">Your website should be fully operatable solely via keyboard input.</input><br><br>
+						<input type="radio" id = "r3" name="radio4">You should limit what the keyboard has access to so that the user doesn't lose track of the selector.</input><br><br>
+						<input type="radio" id = "r4" name="radio4">Users should only be able to use keyboard input for text fields.</input><br><br>
+					</div>
+					<div class="questions" id="qFive">
+						<input type="checkbox" id = "c1" name="check5">Transcripts for audio content.</input><br><br>
+						<input type="checkbox" id = "c2" name="check5">Full audio accompaniment for all written text.</input><br><br>
+						<input type="checkbox" id = "c3" name="check5">A sign language translator in the corner of any videos containing speech.</input><br><br>
+						<input type="checkbox" id = "c4" name="check5">Text form accompaniment for any information presented in images.</input><br><br>
+					</div>
+					<div class="questions" id="qSix">
+						<input type="radio" id = "r1" name="radio6">You should avoid using strong colours.</input><br><br>
+						<input type="radio" id = "r2" name="radio6">You should avoid displaying anything that flashes three or more times a second.</input><br><br>
+						<input type="radio" id = "r3" name="radio6">You should play soothing music whenever strobe lighting effects are visible.</input><br><br>
+						<input type="radio" id = "r4" name="radio6">You should never use animated content.</input><br><br>
+					</div>
+					<div class="questions" id="qSeven">
+						<input type="radio" id = "r1" name="radio7">Make sure your tags are correct and closed, don't give your elements duplicate attributes and use proper nesting.</input><br><br>
+						<input type="radio" id = "r2" name="radio7">Include an external script file provided by the developers of the adaptive technology.</input><br><br>
+						<input type="radio" id = "r3" name="radio7">Make sure your website contains only English text.</input><br><br>
+						<input type="radio" id = "r4" name="radio7">Include a full transcript of any audio content in an html comment.</input><br><br>
+					</div>
+					<div class="questions" id="qEight">
+						<input type="radio" id = "r1" name="radio8">Use light coloured text on light coloured backgrounds.</input><br><br>
+						<input type="radio" id = "r2" name="radio8">Use as many strong contrasting colours as possible to jazz up your website.</input><br><br>
+						<input type="radio" id = "r3" name="radio8">You should avoid using colours other than black and white.</input><br><br>
+						<input type="radio" id = "r4" name="radio8">Use clear colour contrast but avoid using too many strong contrasting colours.</input><br><br>
+					</div>
+					<div class="questions" id="qNine">
+						<input type="checkbox" id = "c1" name="check9">By using clear headings and an intuitive site layout.</input><br><br>
+						<input type="checkbox" id = "c2" name="check9">By ensuring the keyboard current focus is clearly visible.</input><br><br>
+						<input type="checkbox" id = "c3" name="check9">By having an audio announcement for each section when the user scrolls to it.</input><br><br>
+						<input type="checkbox" id = "c4" name="check9">By including a list of navigation instructions on each page.</input><br><br>
+					</div>
+					<div class="questions" id="qTen">
+						<input type="radio" id = "r1" name="radio10">You should provide the user with immediate feedback.</input><br><br>
+						<input type="radio" id = "r2" name="radio10">You should avoid providing the user any feedback so that they do not get distracted.</input><br><br>
+						<input type="radio" id = "r3" name="radio10">You should provide the user with a summary of their actions taken on your website after a few minutes of use.</input><br><br>
+						<input type="radio" id = "r4" name="radio10">You should only give the user feedback when they toggle on an option to receive feedback.</input><br><br>
+					</div>
+					</form>
+					<div class ="buttonContainer">
+					<button id="previousQ" onClick = "pageChanger(-1)"> Previous Question </button>
+					<button id="nextQ" onClick = "pageChanger(1)"> Next Question </button>
+					<button id="begin" onClick = "beginQuiz()"> Start The Quiz </button>
+					<button id="submitScore" onClick = "calculateScore()"> Submit Answers </button>
+					</div>
+					<br><br><br><br>
+				</div>
+			</div>
+			<footer>
+				<p>Website created by Warren Haskins</p>
+				<p>Email:whaskins@hotmail.co.uk</p>
+			</footer>
+		</div>
+		<script>
+			currentQuestion = 0;
+			document.getElementById("nextQ").style.display="none";
+			document.getElementById("previousQ").style.display="none";
+			document.getElementById("qOne").style.display="none";
+			document.getElementById("qTwo").style.display="none";
+			document.getElementById("qThree").style.display="none";
+			document.getElementById("qFour").style.display="none";
+			document.getElementById("qFive").style.display="none";
+			document.getElementById("qSix").style.display="none";
+			document.getElementById("qSeven").style.display="none";
+			document.getElementById("qEight").style.display="none";
+			document.getElementById("qNine").style.display="none";
+			document.getElementById("qTen").style.display="none";
+			document.getElementById("previousQ").style.display="none";
+			document.getElementById("submitScore").style.display="none";
+			
+			function pageChanger(incrementor){
+					currentQuestion += incrementor;
+					setQuestion(currentQuestion);
+					document.getElementById("qNumberTitle").innerHTML = "Question " + currentQuestion;
+					if(currentQuestion == 1){
+						document.getElementById("previousQ").style.display="none";
+					}else{
+						document.getElementById("previousQ").style.display="inline";
+					}
+			}
+			
+			function setQuestion(qNumber){
+				if(qNumber == 1){
+					document.getElementById("qOne").style.display="inline";
+					document.getElementById("qTwo").style.display="none";
+					document.getElementById("qGoesHere").innerHTML = "What should you do with blocks of information to make them more readable?";
+					}
+				if(qNumber == 2){
+					document.getElementById("qOne").style.display="none";
+					document.getElementById("qTwo").style.display="inline";
+					document.getElementById("qThree").style.display="none";
+					document.getElementById("qGoesHere").innerHTML = "Should you use supplemental illustrations on your website?";
+					
+					if(document.qForm.radio1[2].checked == true){
+						s1=1;
+					}else{
+						s1=0;
+					}
+				}else if(qNumber == 3){
+					document.getElementById("qTwo").style.display="none";
+					document.getElementById("qThree").style.display="inline";
+					document.getElementById("qFour").style.display="none";
+					document.getElementById("qGoesHere").innerHTML = "What should you also provide when you use images?";
+					
+					if(document.qForm.radio2[0].checked == true){
+						s2=1;
+					}else{
+						s2=0;
+					}
+				}else if(qNumber == 4){
+					document.getElementById("qThree").style.display="none";
+					document.getElementById("qFour").style.display="inline";
+					document.getElementById("qFive").style.display="none";
+					document.getElementById("qGoesHere").innerHTML = "In what way should your site use keyboard input?";
+					
+					if(document.qForm.radio3[3].checked == true){
+						s3=1;
+					}else{
+						s3=0;
+					}
+				}else if(qNumber == 5){
+					document.getElementById("qFour").style.display="none";
+					document.getElementById("qFive").style.display="inline";
+					document.getElementById("qSix").style.display="none";
+					document.getElementById("qGoesHere").innerHTML = "Of the following, which alternatives to non-text content should you include on your website?";
+					
+					if(document.qForm.radio4[1].checked == true){
+						s4=1;
+					}else{
+						s4=0;
+					}
+				}else if(qNumber == 6){
+					document.getElementById("qFive").style.display="none";
+					document.getElementById("qSix").style.display="inline";
+					document.getElementById("qSeven").style.display="none";
+					document.getElementById("qGoesHere").innerHTML = "What consideration should you make to ensure your site will not cause seizures?";
+					
+					if(document.qForm.check5[0].checked == true && document.qForm.check5[3].checked == true && 
+					document.qForm.check5[1].checked == false && document.qForm.check5[2].checked == false){
+						s5=1;
+					}else{
+						s5=0;
+					}
+				}else if(qNumber == 7){
+					document.getElementById("qSix").style.display="none";
+					document.getElementById("qSeven").style.display="inline";
+					document.getElementById("qEight").style.display="none";
+					document.getElementById("qGoesHere").innerHTML = "How can you make your website compatible with adaptive technology?";
+					
+					if(document.qForm.radio6[1].checked == true){
+						s6=1;
+					}else{
+						s6=0;
+					}
+				}else if(qNumber == 8){
+					document.getElementById("qSeven").style.display="none";
+					document.getElementById("qEight").style.display="inline";
+					document.getElementById("qNine").style.display="none";
+					document.getElementById("qGoesHere").innerHTML = "How should you use colour on your website?";
+					
+					if(document.qForm.radio7[0].checked == true){
+						s7=1;
+					}else{
+						s7=0;
+					}
+				}else if(qNumber == 9){
+					document.getElementById("qEight").style.display="none";
+					document.getElementById("qNine").style.display="inline";
+					document.getElementById("qTen").style.display="none";
+					document.getElementById("nextQ").style.display="inline";
+					document.getElementById("submitScore").style.display="none";
+					document.getElementById("qGoesHere").innerHTML = "In what ways can you help users navigate, find content, and determine where they are on your site?";
+					
+					if(document.qForm.radio8[3].checked == true){
+						s8=1;
+					}else{
+						s8=0;
+					}
+				}else if(qNumber == 10){
+					document.getElementById("qNine").style.display="none";
+					document.getElementById("qTen").style.display="inline";
+					document.getElementById("nextQ").style.display="none";
+					document.getElementById("submitScore").style.display="inline";
+					document.getElementById("qGoesHere").innerHTML = "How should you approach giving the user feedback when they operate elements of your website?";
+					
+					if(document.qForm.check9[0].checked == true && document.qForm.check9[1].checked == true
+					 && document.qForm.check9[2].checked == false && document.qForm.check9[3].checked == false){
+						s9=1;
+					}else{
+						s9=0;
+					}
+				}
+			}
+			
+			function calculateScore(){
+				if(document.qForm.radio10[0].checked == true){
+					s10=1;
+				}else{
+					s10=0;
+				}
+				
+				currentScore = s1 + "" + s2 + "" + s3 + "" + s4 + "" + s5 + "" + s6 + "" + s7 + "" + s8 + "" + s9 + "" + s10;
+				document.cookie = currentScore;
+				window.location.href="questionnaire_summary.html";
+			}
+			
+			function beginQuiz(){
+				document.getElementById("intro").style.display="none";
+				document.getElementById("qOne").style.display="inline";
+				document.getElementById("nextQ").style.display="inline";
+				document.getElementById("begin").style.display="none";
+				document.getElementById("qNumberTitle").innerHTML = "Question " + 1;""
+				document.getElementById("qGoesHere").innerHTML = "What should you do with blocks of information to make them more readable?";
+				currentQuestion += 1;
+			}
+		</script>
+	</body>
+</html>
+	

@@ -1,0 +1,34 @@
+Where does the nested statement appear?
+WHERE
+What are the key words used for nested statements?
+IN, NOT IN, EXISTS
+What is the additional keyword used for negative statements?
+NOT
+Is order important if you wanted to see customers who haven’t ordered anything?
+yes, order relevant in negative statements
+Which table would appear first, customers or orders?
+customers
+Which method is more efficient a join or a sub query?
+Join
+
+SELECT d.name
+FROM databases d
+WHERE d.name in(
+	SELECT p.name
+	FROM programming p
+	);
+
+SELECT SUM(balance)
+FROM programming
+WHERE name NOT IN(
+	SELECT name
+	FROM databases
+	);
+
+SELECT lecturer_id, name
+FROM lecturers
+WHERE lecturer_id NOT IN(
+	SELECT course_lecturers
+	FROM course_lecturers
+	);
+	

@@ -1,0 +1,39 @@
+--@C:/procedures.txt
+-----------------------------------------------------------
+--Procedures-----------------------------------------
+
+SET SERVEROUTPUT ON
+
+--Work out reviewers’ age using date function
+CREATE OR REPLACE PROCEDURE proc_reviewer_age (in_username reviewers.username%TYPE)
+IS
+	vd_dob DATE;
+	vn_date_diff NUMBER(10);
+BEGIN	
+	SELECT dob
+	INTO vd_dob
+	FROM reviewers
+	WHERE username=in_username;
+	
+	vn_date_diff:=func_date_ct(vd_dob)/365;
+	DBMS_OUTPUT.PUT_LINE('The reviewer ' || in_username || ' is ' || vn_date_diff || ' years old');
+
+END proc_reviewer_age;
+/
+
+--Last visit date, work out days since last visit using the date function
+CREATE OR REPLACE PROCEDURE proc_last_visit (in_review_id reviews.review_id%TYPE)
+IS
+	vd_visit_date DATE;
+	vn_date_diff NUMBER(4);
+BEGIN 
+	SELECT visit_date
+	INTO vd_visit_date
+	FROM reviews
+	WHERE review_id=in_review_id;
+	
+	vn_date_diff:=func_date_ct(vd_visit_date);
+	DBMS_OUTPUT.PUT_LINE('It has been ' || vn_date_diff || ' since last visit');
+	
+END proc_last_visit;
+/

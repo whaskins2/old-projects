@@ -1,0 +1,2 @@
+SELECT student_firstname ||','|| student_surname, gender, phone_number
+FROM students;

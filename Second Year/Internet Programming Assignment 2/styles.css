@@ -1,0 +1,49 @@
+body{
+			background-color: #fff;
+			}
+
+header{
+			/* Here the header is given size, colour and a border. The border radius property lets us curve the border's edges and is used throughout the site. */
+			background-color:#C0C0C0;
+			border-style:solid;
+			border-radius:25px;
+			width:98%;
+			margin-left:auto;
+			margin-right:auto;
+			text-align:center;
+			clear:both;
+			padding-top:1px;
+			}
+
+.mainbody{
+			/* This section gives the largest box its features and makes sure it sits to the left of the sidebar. */
+			background-color:white;
+			margin-left:1%;
+			padding-left:0%;
+			font-family:sans-serif;
+			margin-top:1%;
+			margin-bottom:1%;
+			clear:both;
+			text-align:center;
+			min-height:350px;
+			}
+table{
+	margin-left:auto;
+	margin-right:auto;
+}
+			
+footer{
+			/* The footer is just like the header but at the bottom of the page. */
+			background-color:#C0C0C0;
+			border-style:solid;
+			border-radius:25px;
+			width:98%;
+			margin-left:auto;
+			margin-right:auto;
+			text-align:center;
+			clear:both;
+			padding-top:1px;
+			}
+.navigation{
+			text-align:center;
+}

@@ -1,0 +1,16 @@
+SELECT MAX(training_budget), CEIL(training_budget), FLOOR(training_budget), ROUND(training_budget), TRUNC(training_budget)
+FROM companies;
+
+SELECT MAX(training_budget), CEIL(MAX(training_budget)), FLOOR(MAX(training_budget)), ROUND(MAX(training_budget)), TRUNC(MAX(training_budget))
+FROM companies;
+
+SELECT CONCAT('Good Morning ', CONCAT(SUBSTR(student_firstname,1,2), SUBSTR(student_surname,1,5)))
+FROM students;
+
+SELECT LOWER(CONCAT('Good Morning ', CONCAT(SUBSTR(student_firstname,1,2), SUBSTR(student_surname,1,5))))
+FROM students;
+
+SELECT CONCAT('good morning ',
+CONCAT(TRIM(TRAILING ' ' FROM CONCAT(SUBSTR(student_firstname,1,1),LOWER(SUBSTR(student_firstname,2,2)))),
+TRIM(TRAILING ' ' FROM CONCAT(SUBSTR(student_surname,1,1), LOWER(SUBSTR(student_surname,2,5))))))
+FROM students;

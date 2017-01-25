@@ -1,0 +1,28 @@
+What command is used to ensure that outputs are displayed on screen?
+SET SERVEROUTPUT ON
+
+What is the name of the package that allows you to print values to screen?
+DBMS_OUTPUT.PUT_LINE() or .PUT()
+
+What are the 3 elements of a FOR loop
+Counter integer, lower bound, upper bound
+
+What datatypes are used in the components of a FOR?
+Integer - Numeric, increments by 1.
+
+Where is the test evaluated in a WHILE loop?
+At the start
+
+What is the keyword to allow you to leave a basic loop?
+EXIT
+
+:= - assignment operator
+
+DECLARE;
+vc_name VARCHAR(30) := 'CAROLE';
+BEGIN;
+FOR vn_counter IN 1..LENGTH(vc_name) LOOP
+	DBMS_OUTPUT.PUT_LINE(SUBSTR(vc_name,vn_counter,1));
+END LOOP;
+END;
+/

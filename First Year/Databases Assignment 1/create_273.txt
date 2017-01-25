@@ -1,0 +1,146 @@
+﻿-- Warren Haskins 14438496, Robert Paton 14414702, Daniel Simpson 14411184, Seb Tevendale 14411145, GROUP 26
+
+-- RunCommand @X:\Databases\Assignment_1\create_273.txt
+
+----------- TABLES ------------
+
+CREATE TABLE customers(
+customer_id        NUMBER(5),
+title              VARCHAR2(4),
+customer_firstname VARCHAR2(20),
+customer_lastname  VARCHAR2(30),
+address_line1      VARCHAR2(30),
+town               VARCHAR2(20),
+county             VARCHAR2(20),
+postcode           VARCHAR2(8),
+country            VARCHAR2(15) DEFAULT 'UK',
+contact_number     VARCHAR2(11) NOT NULL,
+email              VARCHAR2(30),
+gender             VARCHAR(1) DEFAULT 'M',
+date_registered    DATE DEFAULT SYSDATE);
+
+CREATE TABLE sales_staff(
+staff_id           NUMBER(5),
+title              VARCHAR2(4),
+staff_firstname    VARCHAR2(20),
+staff_lastname     VARCHAR2(30),
+department         VARCHAR2(20),
+address_line1      VARCHAR2(30),
+town               VARCHAR2(20),
+county             VARCHAR2(20),
+postcode           VARCHAR2(8),
+country            VARCHAR2(15) DEFAULT 'UK',
+contact_number     VARCHAR2(11) NOT NULL,
+email              VARCHAR2(30),
+gender             VARCHAR(1) DEFAULT 'M',
+date_registered    DATE DEFAULT SYSDATE);
+
+CREATE TABLE payments(
+payment_id         NUMBER(5),
+amount_paid        NUMBER(6,2),
+date_paid          DATE DEFAULT SYSDATE,
+payment_type       VARCHAR2(20) NOT NULL);
+
+CREATE TABLE products(
+product_id         NUMBER(5),
+product_name	   VARCHAR2(40) NOT NULL,
+category           VARCHAR2(25),
+price              NUMBER(6,2),
+stock              NUMBER(5),
+weight             NUMBER(5,2),
+location           VARCHAR2(20));
+
+CREATE TABLE suppliers (
+supplier_id        NUMBER(5),
+company_name       VARCHAR2(30),
+address_line1      VARCHAR2(30),
+town               VARCHAR2(20),
+county             VARCHAR2(20),
+postcode           VARCHAR2(8),
+country            VARCHAR2(15),
+contact_number     VARCHAR2(11) NOT NULL,
+email              VARCHAR2(30));
+
+CREATE TABLE supplier_payments (
+supplier_payment_id    NUMBER(5),
+amount_paid            NUMBER(10,2),
+payment_date           DATE DEFAULT SYSDATE,
+payment_type           VARCHAR2(20) NOT NULL);
+
+CREATE TABLE customer_payments (
+customer_id        NUMBER(5) NOT NULL,
+payment_id         NUMBER(5) NOT NULL);
+
+CREATE TABLE customer_orders (
+order_id		   NUMBER(5),
+customer_id        NUMBER(5) NOT NULL,
+staff_id 		   NUMBER(5) NOT NULL,
+order_date         DATE DEFAULT SYSDATE);
+
+CREATE TABLE customer_invoices (
+customer_invoice_id    NUMBER(5),
+customer_id            NUMBER(5) NOT NULL,
+payment_id             NUMBER(5) NOT NULL,
+invoice_date           DATE);
+
+CREATE TABLE supplier_orders (
+supplier_order_id      NUMBER(5),
+supplier_id            NUMBER(5) NOT NULL,
+order_date             DATE DEFAULT SYSDATE);
+
+CREATE TABLE supplier_invoices (
+supplier_invoice_id    NUMBER(5),
+supplier_payment_id    NUMBER(5) NOT NULL,
+invoice_date           DATE DEFAULT SYSDATE);
+
+CREATE TABLE supplier_orderlines(
+supplier_order_id      NUMBER(5) NOT NULL,
+supplier_invoice_id    NUMBER(5) NOT NULL,
+product_id             NUMBER(5) NOT NULL);
+
+CREATE TABLE customer_orderlines(
+order_id              NUMBER(5) NOT NULL,
+customer_invoice_id   NUMBER(5) NOT NULL,
+product_id            NUMBER(5) NOT NULL);
+
+----------- SEQUENCES------------
+
+CREATE SEQUENCE seq_customer
+INCREMENT BY 1
+START WITH 10000;
+
+CREATE SEQUENCE seq_staff
+INCREMENT BY 1
+START WITH 10000;
+
+CREATE SEQUENCE seq_customer_payment
+INCREMENT BY 1
+START WITH 10000;
+
+CREATE SEQUENCE seq_supplier_payment
+INCREMENT BY 1
+START WITH 10000;
+
+CREATE SEQUENCE seq_customer_invoice
+INCREMENT BY 1
+START WITH 10000;
+
+CREATE SEQUENCE seq_supplier_order
+INCREMENT BY 1
+START WITH 10000;
+
+CREATE SEQUENCE seq_customer_order
+INCREMENT BY 1
+START WITH 10000;
+
+CREATE SEQUENCE seq_supplier_invoice
+INCREMENT BY 1
+START WITH 10000;
+
+CREATE SEQUENCE seq_product
+INCREMENT BY 1
+START WITH 10000;
+
+CREATE SEQUENCE seq_supplier
+INCREMENT BY 1
+START WITH 10000;

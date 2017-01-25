@@ -1,0 +1,101 @@
+SET SERVEROUTPUT ON
+
+--Normal Loop
+DECLARE
+	vn_length NUMBER(10);
+	vn_counter NUMBER(10) := 1;
+	vc_firstname VARCHAR2(20) := 'WARREN';
+	vc_surname VARCHAR2(20) := 'HASKINS';
+
+BEGIN
+	vn_length := LENGTH(vc_firstname);
+	LOOP
+		EXIT WHEN vn_counter > vn_length;
+		DBMS_OUTPUT.PUT_LINE(SUBSTR(vc_firstname, vn_counter, 1));
+		vn_counter := vn_counter + 1;
+	END LOOP;
+	DBMS_OUTPUT.PUT_LINE(vc_surname);
+END;
+/
+
+--While loop
+DECLARE
+	vn_length NUMBER(10);
+	vn_counter NUMBER(10) := 1;
+	vc_firstname VARCHAR2(20) := 'WARREN';
+	vc_surname VARCHAR2(20) := 'HASKINS';
+
+BEGIN
+	vn_length := LENGTH(vc_firstname);
+	WHILE vn_counter < (vn_length + 1) LOOP
+		DBMS_OUTPUT.PUT_LINE(SUBSTR(vc_firstname, vn_counter, 1));
+		vn_counter := vn_counter + 1;
+	END LOOP;
+	DBMS_OUTPUT.PUT_LINE(vc_surname);
+END;
+/
+
+--For Loop
+DECLARE
+	vn_length NUMBER(10);
+	vn_counter NUMBER(10) := 1;
+	vc_firstname VARCHAR2(20) := 'WARREN';
+	vc_surname VARCHAR2(20) := 'HASKINS';
+
+BEGIN
+	vn_length := LENGTH(vc_firstname);
+	FOR vn_counter IN 1 .. vn_length LOOP
+		DBMS_OUTPUT.PUT_LINE(SUBSTR(vc_firstname, vn_counter, 1));
+	END LOOP;
+	DBMS_OUTPUT.PUT_LINE(vc_surname);
+END;
+/
+--Bonus 1
+DECLARE
+	vn_length NUMBER(10);
+	vn_counter NUMBER(10) := 1;
+	vc_firstname VARCHAR2(20) := 'WARREN';
+	vc_middlename VARCHAR2(20) := 'PAUL';
+	vc_surname VARCHAR2(20) := 'HASKINS';
+
+BEGIN
+	vn_length := LENGTH(vc_firstname);
+	DBMS_OUTPUT.PUT_LINE('--firstname--');
+	LOOP
+		EXIT WHEN vn_counter > vn_length;
+		DBMS_OUTPUT.PUT_LINE(SUBSTR(vc_firstname, vn_counter, 1));
+		vn_counter := vn_counter + 1;
+	END LOOP;
+	
+	DBMS_OUTPUT.PUT_LINE('--middlename--');
+	vn_length := LENGTH(vc_middlename);
+	vn_counter := 1;
+	WHILE vn_counter < (vn_length + 1) LOOP
+		DBMS_OUTPUT.PUT_LINE(SUBSTR(vc_middlename, vn_counter, 1));
+		vn_counter := vn_counter + 1;
+	END LOOP;
+	
+	DBMS_OUTPUT.PUT_LINE('--surname--');
+	vn_length := LENGTH(vc_surname);
+	vn_counter :=1;
+	FOR vn_counter IN 1 .. vn_length LOOP
+		DBMS_OUTPUT.PUT_LINE(SUBSTR(vc_surname, vn_counter, 1));
+	END LOOP;
+END;
+/
+-- BONUS 2 - NESTED LOOPS
+DECLARE
+	vc_letters VARCHAR2(5) := 'ABCDE';
+	vn_numbers NUMBER(4) := 1234;
+	vn_count_num NUMBER(5) := 1;
+	vn_count_letter NUMBER(5) := 1;
+	
+BEGIN
+	FOR vn_count_letter IN 1 .. LENGTH(vc_letters) LOOP
+		DBMS_OUTPUT.PUT_LINE(SUBSTR(vc_letters, vn_count_letter, 1));
+		FOR vn_count_num IN 1..4 LOOP
+			DBMS_OUTPUT.PUT_LINE(SUBSTR(vn_numbers, vn_count_num, 1));
+		END LOOP;
+	END LOOP;
+END;
+/

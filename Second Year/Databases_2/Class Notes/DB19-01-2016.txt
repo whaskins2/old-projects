@@ -1,0 +1,27 @@
+SELECT CEIL (AVG(salary)) "ceiling salary",
+	FLOOR (AVG(salary)),
+	ROUND(AVG(salary), 2)
+FROM staff; 
+
+SELECT CONCAT(
+	SUBSTR(firstname, 1, 2),
+	SUBSTR(surname, 1, 5))
+FROM STAFF;
+
+SELECT TRIM(TRAILING ' ' FROM firstname, surname)
+FROM STAFF;
+
+Which function rounds numerical values up?
+CEIL
+How many parameters does CONCAT accept?
+Two
+What does LENGTH do?
+returns length of char
+What is the difference between MOD and REMAINDER?
+Mod uses floor, remainder uses round
+What will be the output from SELECT TRUNC(1234.567, 2) FROM DUAL; ?
+1234.56
+What will be the output from SELECT TRUNC(1234.567) FROM DUAL; ?
+1234
+Is ROUND a single line function or an aggregate function; ?
+Single line

@@ -1,0 +1,63 @@
+--@C:/triggers.txt
+-----------------------------------------------------------
+--Triggers-------------------------------------------------
+
+SET SERVEROUTPUT ON
+
+--Inserting/Updating/Deleting a review; when inserting the information from table is shown,
+--as well as when updating. When deleting, the piece of information you’re deleting is shown
+
+CREATE OR REPLACE TRIGGER trig_review
+AFTER INSERT OR UPDATE OR DELETE ON reviews
+FOR EACH ROW
+
+DECLARE
+	vn_venue_name venues.name%TYPE;
+	rn_reviewer_name reviewers.username%TYPE;
+BEGIN
+	IF (INSERTING OR UPDATING) THEN
+		SELECT name 
+		INTO vn_venue_name
+		FROM venues
+		WHERE venue_id = :NEW.venue_id;
+		
+		SELECT username 
+		INTO rn_reviewer_name
+		FROM reviewers
+		WHERE reviewer_id = :NEW.reviewer_id;
+		
+		DBMS_OUTPUT.PUT_LINE('Review ID: ' || :NEW.review_id);
+		DBMS_OUTPUT.PUT_LINE('Venue Name: ' || vn_venue_name);
+		DBMS_OUTPUT.PUT_LINE('Reviewer: ' || rn_reviewer_name);
+		DBMS_OUTPUT.PUT_LINE('Visit Date: ' || :NEW.visit_date);
+		DBMS_OUTPUT.PUT_LINE('Description: ' || :NEW.description);
+		DBMS_OUTPUT.PUT_LINE('Rating: ' || :NEW.rating);
+
+	ELSIF DELETING THEN
+		SELECT name 
+		INTO vn_venue_name
+		FROM venues
+		WHERE venue_id = :OLD.venue_id;
+		
+		SELECT username
+		INTO rn_reviewer_name
+		FROM reviewers
+		WHERE reviewer_id = :OLD.reviewer_id;
+		
+		DBMS_OUTPUT.PUT_LINE(' You are deleting review:' || :OLD.review_id|| ' written by ' || rn_reviewer_name || ' about ' || vn_venue_name);
+	
+	END IF;
+	
+END trig_review;
+/
+
+--When adding a venue, a message is shown informing that a room needs to be added
+
+CREATE OR REPLACE TRIGGER trig_roomreq
+AFTER INSERT ON venues
+FOR EACH ROW
+WHEN (NEW.room IS NULL)
+BEGIN
+		DBMS_OUTPUT.PUT_LINE('You need to add some rooms to ' || :NEW.name);
+END trig_roomreq;
+/

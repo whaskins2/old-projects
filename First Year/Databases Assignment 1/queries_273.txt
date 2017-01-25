@@ -1,0 +1,50 @@
+-- Warren Haskins 14438496, Robert Paton 14414702, Daniel Simpson : 14411184, Seb Tevendale 14411145, GROUP 26
+
+-- RunCommand @X:\Databases\Assignment_1\queries_273.txt
+
+----------- ALL CUSTOMER RECORDS ------------
+
+SELECT *
+FROM customers;
+
+----------- CUSTOMERS WHO LIVE IN NORTHAMPTON ------------
+
+SELECT customer_firstname, customer_lastname, contact_number, town
+FROM customers
+WHERE town LIKE 'NORTHAMPTON';
+
+----------- CUSTOMER'S SURNAME THAT BEGINS WITH "M" ------------
+
+SELECT customer_firstname, customer_lastname, contact_number
+FROM customers
+WHERE customer_lastname LIKE 'M%';
+
+----------- SURNAME FIRST  ------------
+
+SELECT customer_lastname, customer_firstname, contact_number
+FROM customers
+ORDER BY customer_lastname DESC;
+
+----------- REGISTERED BETWEEN JAN 104 AND DEC 2014 ------------
+
+SELECT customer_lastname, customer_firstname, contact_number, date_registered
+FROM customers
+WHERE date_registered BETWEEN '01/JAN/2014' AND '01/DEC/2014' 
+AND town NOT LIKE 'NORTHAMPTON'
+ORDER BY customer_lastname ASC;
+
+----------- CUSTOMER ORDERS WITH THEIR PAYMENT METHODS ------------
+
+SELECT customer_orderlines.order_id, payments.payment_type
+FROM customer_orderlines, payments, customer_payments, customer_invoices
+WHERE customer_invoices.customer_invoice_id=customer_orderlines.customer_invoice_id
+AND customer_payments.payment_id=customer_invoices.payment_id
+AND payments.payment_id=customer_payments.payment_id;
+
+----------- CUSTOMER ORDERS WITH CUSTOMER AND STAFF NAMES ------------
+
+SELECT customers.title, customers.customer_firstname, customers.customer_lastname, customer_orders.order_id, 
+sales_staff.title, sales_staff.staff_firstname, sales_staff.staff_lastname
+FROM customers, sales_staff, customer_orders 
+WHERE customers.customer_id=customer_orders.customer_id
+AND sales_staff.staff_id=customer_orders.staff_id;

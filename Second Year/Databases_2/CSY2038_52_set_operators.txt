@@ -1,0 +1,30 @@
+--UNION
+SELECT site_id, s.address.city
+FROM sites s
+UNION
+SELECT instructor_id, i.address.city
+FROM instructors i;
+
+--INTERSECT
+SELECT s.address.city
+FROM sites s
+INTERSECT
+SELECT i.address.city
+FROM instructors i;
+
+--MINUS
+SELECT s.address.city
+FROM sites s
+MINUS
+SELECT i.address.city
+FROM instructors i;
+
+--MINUS A UNION
+SELECT s.address.city
+FROM sites s
+MINUS
+(SELECT i.address.city
+FROM instructors i
+UNION
+SELECT st.address.city
+FROM students st);

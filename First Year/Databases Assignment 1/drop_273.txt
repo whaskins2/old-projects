@@ -1,0 +1,165 @@
+﻿-- Warren Haskins 14438496, Robert Paton 14414702, Daniel Simpson : 14411184, Seb Tevendale 14411145, GROUP 26
+
+-- RunCommand @X:\Databases\Assignment_1\drop_273.txt
+
+----------- UNIQUE CONSTRAINT DROPS ------------
+
+ALTER TABLE suppliers
+DROP CONSTRAINTS u_supplier_contact_number;
+
+ALTER TABLE suppliers
+DROP CONSTRAINTS u_supplier_email;
+
+ALTER TABLE sales_staff
+DROP CONSTRAINTS u_staff_email;
+
+ALTER TABLE customers
+DROP CONSTRAINTS u_customer_email;
+
+----------- CHECK CONSTRAINT DROPS ------------
+
+ALTER TABLE suppliers
+DROP CONSTRAINTS ck_company_name;
+
+ALTER TABLE sales_staff
+DROP CONSTRAINTS ck_staff_gender;
+
+ALTER TABLE sales_staff
+DROP CONSTRAINTS ck_staff_lname;
+
+ALTER TABLE sales_staff
+DROP CONSTRAINTS ck_staff_fname;
+
+ALTER TABLE sales_staff
+DROP CONSTRAINTS ck_staff_title;
+
+ALTER TABLE customers
+DROP CONSTRAINTS ck_customers_gender;
+
+ALTER TABLE customers
+DROP CONSTRAINTS ck_customers_lname;
+
+ALTER TABLE customers
+DROP CONSTRAINTS ck_customers_fname;
+
+ALTER TABLE customers
+DROP CONSTRAINTS ck_customers_title;
+
+----------- FOREIGN KEY CONSTRAINT DROPS ------------
+
+ALTER TABLE customer_orderlines
+DROP CONSTRAINT fk_col_product_id;
+
+ALTER TABLE customer_orderlines
+DROP CONSTRAINT fk_col_customer_invoice_id;
+
+ALTER TABLE customer_orderlines
+DROP CONSTRAINT fk_col_order_id;
+
+ALTER TABLE supplier_orderlines
+DROP CONSTRAINT fk_sol_product_id;
+
+ALTER TABLE supplier_orderlines
+DROP CONSTRAINT fk_sol_supplier_invoice_id;
+
+ALTER TABLE supplier_orderlines
+DROP CONSTRAINT fk_sol_supplier_order_id;
+
+ALTER TABLE supplier_invoices
+DROP CONSTRAINT fk_supplier_invoices;
+
+ALTER TABLE supplier_orders
+DROP CONSTRAINT fk_supplier_orders;
+
+ALTER TABLE customer_invoices
+DROP CONSTRAINT fk_customer_invoices;
+
+ALTER TABLE customer_orders
+DROP CONSTRAINT fk_co_staff_id;
+
+ALTER TABLE customer_orders
+DROP CONSTRAINT fk_co_customer_id;
+
+ALTER TABLE customer_payments
+DROP CONSTRAINT fk_cp_payment_id;
+
+ALTER TABLE customer_payments
+DROP CONSTRAINT fk_cp_customer_id;
+
+----------- PRIMARY KEY CONSTRAINT DROPS------------
+
+ALTER TABLE customer_orderlines
+DROP CONSTRAINT pk_customer_orderlines;
+
+ALTER TABLE supplier_orderlines
+DROP CONSTRAINT pk_supplier_orderlines;
+
+ALTER TABLE supplier_invoices
+DROP CONSTRAINT pk_supplier_invoices_id;
+
+ALTER TABLE supplier_orders
+DROP CONSTRAINT pk_supplier_order_id;
+
+ALTER TABLE customer_invoices
+DROP CONSTRAINT pk_customer_invoice_id;
+
+ALTER TABLE customer_orders
+DROP CONSTRAINT pk_customer_orders;
+
+ALTER TABLE customer_payments
+DROP CONSTRAINT pk_customer_payments;
+
+ALTER TABLE supplier_payments
+DROP CONSTRAINT pk_supplier_payment_id;
+
+ALTER TABLE suppliers
+DROP CONSTRAINT pk_supplier_id;
+
+ALTER TABLE products
+DROP CONSTRAINT pk_product_id;
+
+ALTER TABLE payments
+DROP CONSTRAINT pk_payment_id;
+
+ALTER TABLE sales_staff
+DROP CONSTRAINT pk_staff_id;
+
+ALTER TABLE customers
+DROP CONSTRAINT pk_customer_id;
+
+----------- TABLE DROPS ------------
+
+DROP TABLE customers;
+DROP TABLE sales_staff;
+DROP TABLE payments;
+DROP TABLE products;
+DROP TABLE suppliers;
+DROP TABLE supplier_payments;
+DROP TABLE customer_payments;
+DROP TABLE customer_orders;
+DROP TABLE customer_invoices;
+DROP TABLE supplier_orders;
+DROP TABLE supplier_invoices;
+DROP TABLE supplier_orderlines;
+DROP TABLE customer_orderlines;
+
+----------- SEQUENCE DROPS ------------
+
+DROP SEQUENCE seq_customer;
+DROP SEQUENCE seq_supplier;
+DROP SEQUENCE seq_staff;
+DROP SEQUENCE seq_product;
+DROP SEQUENCE seq_customer_payment;
+DROP SEQUENCE seq_supplier_order;
+DROP SEQUENCE seq_customer_order;
+DROP SEQUENCE seq_supplier_payment;
+DROP SEQUENCE seq_supplier_invoice;
+DROP SEQUENCE seq_customer_invoice;
+
+----------- PURGE RECYCLEBIN ------------
+
+purge recyclebin;
+
+----------- CONFIRM DELETION ------------
+
+SELECT * FROM TAB;

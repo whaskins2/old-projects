@@ -1,0 +1,236 @@
+-- Warren Haskins 14438496, Robert Paton 14414702, Daniel Simpson 14411184, Seb Tevendale 14411145, GROUP 26
+
+-- RunCommand @X:\Databases\Assignment_1\insert_273.txt
+
+------------ CUSTOMERS -------------
+
+INSERT INTO customers
+VALUES (seq_customer.NEXTVAL, 'MR', 'ROBERT', 'PATON', '11 ST MICHAELS MOUNT', 'NORTHAMPTON', 'NORTHAMPTONSHIRE', 'NN1 4JH', 'UK', '07751436662', 'ROB.PATON@GMAIL.COM', 'M', '13-JAN-2008');
+
+INSERT INTO customers
+VALUES (seq_customer.NEXTVAL, 'MR', 'WARREN', 'MASKINS', '15 ABINGTON ROAD', 'NORTHAMPTON', 'NORTHAMPTONSHIRE', 'NN5 8UH', 'UK', '01604644817', 'WARREN.HASKINS@GOOGLEMAIL.COM', 'M', '26-AUG-2010');
+
+INSERT INTO customers
+VALUES (seq_customer.NEXTVAL, 'MISS', 'CATHERINE', 'MAYLOR', '234 VERBUSY ROAD', 'LONDON', 'GREATER LONDON', 'NW5 1EQ', 'UK', '07756002136', 'CTAYLOR@MSN.COM', 'F', '20-JUN-2014');
+
+INSERT INTO customers
+VALUES (seq_customer.NEXTVAL, 'MRS', 'JADE', 'SMITH', '88 DATABASE STREET', 'BEDFORD', 'BEDFORDSHIRE', 'BD3 9AK', 'UK', '01478518912', 'J.SMITH@GMAIL.COM', 'F', '09-OCT-2010');
+
+INSERT INTO customers
+VALUES (seq_customer.NEXTVAL, 'DR', 'HAROLD', 'ARDMUN', '5 ROCK ROAD', 'BERLIN', 'BERLIN', 'BR1 4OK', 'GERMANY', '01134786145', 'H.ARDMUN@YAHOO.COM', 'M', '18-MAR-2014');
+
+
+------------ SALES STAFF -------------
+
+INSERT INTO sales_staff (staff_id, title, staff_firstname, staff_lastname, department, address_line1, town, county, postcode, country, contact_number, email, gender, date_registered)
+VALUES (seq_staff.NEXTVAL, 'MR', 'GEORGE', 'CLOONEY', 'MARKETING', '2 HANDLEY CLOSE', 'NORTHAMPTON', 'NORTHAMPTONSHIRE', 'NN57LE', 'UK', '07304957634', 'THECLOONOID@CLOONER.CO.UK', 'M', '12-JAN-2008');
+
+INSERT INTO sales_staff (staff_id, title, staff_firstname, staff_lastname, department, address_line1, town, county, postcode, country, contact_number, email, gender, date_registered)
+VALUES (seq_staff.NEXTVAL, 'MR', 'ASHTON', 'KUTCHER', 'MARKETING', '25 KETTERING ROAD', 'NORTHAMPTON', 'NORTHAMPTONSHIRE', 'NN14RN', 'UK', '07733058572', 'ASHTONMASHEDEM@HOLLYWOOD.CO.UK', 'M', '02-MAR-2010');
+
+INSERT INTO sales_staff (staff_id, title, staff_firstname, staff_lastname, department, address_line1, town, county, postcode, country, contact_number, email, gender, date_registered)
+VALUES (seq_staff.NEXTVAL, 'MRS', 'DAWN', 'FRENCH', 'SALES', '14 MALI LANE', 'WELLINGBOROUGH', 'NORTHAMPTONSHIRE', 'NN84LG', 'UK', '07846032850', 'FRENCHIE@SAUNDERS.COM', 'F', '24-NOV-2005');
+
+INSERT INTO sales_staff (staff_id, title, staff_firstname, staff_lastname, department, address_line1, town, county, postcode, country, contact_number, email, gender, date_registered)
+VALUES (seq_staff.NEXTVAL, 'MR', 'AINSLEY', 'HARRIOTT', 'CANTEEN', '74 CHEF LANE', 'NORTHAMPTON', 'NORTHAMPTONSHIRE', 'NN114LE', 'UK', '07449348590', 'THECHEF@YAHOO.CO.UK', 'M', '16-AUG-2014');
+
+INSERT INTO sales_staff (staff_id, title, staff_firstname, staff_lastname, department, address_line1, town, county, postcode, country, contact_number, email, gender, date_registered)
+VALUES (seq_staff.NEXTVAL, 'DR', 'JUDGE', 'DREDD', 'SECURITY', '17 MEGACITYONE LANE', 'NORTHAMPTON', 'NORTHAMPTONSHIRE', 'NN63XS', 'UK', '07849583954', 'IAMTHELAW@WHYNOSEQUAL.COM', 'M', '05-MAR-2005');
+
+
+------------ PAYMENTS -------------
+
+INSERT INTO payments (payment_id, amount_paid, date_paid, payment_type)
+VALUES (seq_customer_payment.NEXTVAL, 49.99, '17-MAR-2015', 'DIRECT DEBIT');
+
+INSERT INTO payments (payment_id, amount_paid, date_paid, payment_type)
+VALUES (seq_customer_payment.NEXTVAL, 85.00, '12-DEC-2014', 'CASH');
+
+INSERT INTO payments (payment_id, amount_paid, date_paid, payment_type)
+VALUES (seq_customer_payment.NEXTVAL, 119.99, '07-JUL-2013', 'CHECK');
+
+INSERT INTO payments (payment_id, amount_paid, date_paid, payment_type)
+VALUES (seq_customer_payment.NEXTVAL, 74.99, '16-JAN-2015', 'STORE CREDIT');
+
+INSERT INTO payments (payment_id, amount_paid, payment_type)
+VALUES (seq_customer_payment.NEXTVAL, 49.99, 'DIRECT DEBIT');
+
+
+------------ PRODUCTS -------------
+
+INSERT INTO products (product_id, product_name, category, price, stock, weight, location)
+VALUES (seq_product.NEXTVAL, 'MAGENTA OAK LAWN CHAIR', 'GARDEN FURNITURE', 49.99, 7, 20, 'NORTHAMPTON');
+
+INSERT INTO products (product_id, product_name, category, price, stock, weight, location)
+VALUES (seq_product.NEXTVAL, 'BEIGE OAK CHEST OF DRAWERS', 'BEDROOM FURNITURE', 119.99, 12, 50, 'PETERBOROUGH');
+
+INSERT INTO products (product_id, product_name, category, price, stock, weight, location)
+VALUES (seq_product.NEXTVAL, 'STEEL BED FRAME', 'BEDROOM FURNITURE', 85.00, 24, 30, 'NORTHAMPTON');
+
+INSERT INTO products (product_id, product_name, category, price, stock, weight, location)
+VALUES (seq_product.NEXTVAL, 'PINE COFFEE TABLE', 'BEDROOM FURNITURE', 74.99, 5, 20, 'NORTHAMPTON');
+
+INSERT INTO products (product_id, product_name, category, price, stock, weight, location)
+VALUES (seq_product.NEXTVAL, 'OUTDOOR SWINGSET', 'GARDEN FURNITURE', 199.99, 2, 70, 'PETERBOROUGH');
+
+
+------------ SUPPLIERS -------------
+
+INSERT INTO suppliers (supplier_id, company_name, address_line1, town, county, postcode, country, contact_number, email)
+VALUES (seq_supplier.NEXTVAL, 'FRESH FISH INC', '42 WALLABY WAY', 'SYDNEY', 'CUMBERLAND', 'SD1 9YT', 'AUSTRALIA', '01789567000', 'ENQUIRIES@FRESHFISHINC.COM'); 
+
+INSERT INTO suppliers (supplier_id, company_name, address_line1, town, county, postcode, country, contact_number, email)
+VALUES (seq_supplier.NEXTVAL, 'GARYS GARDEN FURNITURE', '100 INDUSTRY LANE', 'NEWCASTLE', 'TYNE AND WEAR', 'NE1 9OL', 'UK', '08170782557', 'GARY@GGARDENFURNITURE.co.uk'); 
+
+INSERT INTO suppliers (supplier_id, company_name, address_line1, town, county, postcode, country, contact_number, email)
+VALUES (seq_supplier.NEXTVAL, 'BRIDGMAN', '11 BEARS DEN', 'GLASGOW', 'LANARKSHIRE', 'GL7 9TY', 'UK' , '08907478965', 'SALES@BRIDGMAN.COM'); 
+
+INSERT INTO suppliers (supplier_id, company_name, address_line1, town, county, postcode, country, contact_number, email)
+VALUES (seq_supplier.NEXTVAL, 'IKEA', '56 NORTH HILL', 'PLYMOUTH', 'DEVON', 'PL1 8LL', 'UK' , '01345997430', 'ENQUIRIES@IKEA.SWE'); 
+
+INSERT INTO suppliers (supplier_id, company_name, address_line1, town, county, postcode, country, contact_number, email)
+VALUES (seq_supplier.NEXTVAL, 'SHRUBS', '8 AVE DE TERVUEREN', 'BRUSSELS', 'COUNTY OF BRUSSELS', 'BW5 0IL', 'BELGIUM' , '08007650091', 'SALES@SHRUBS.COM'); 
+
+
+------------ SUPPLIER PAYMENTS -------------
+
+INSERT INTO supplier_payments (supplier_payment_id, amount_paid, payment_date, payment_type)
+VALUES (seq_supplier_payment.NEXTVAL, 5000, '12-MAR-2015', 'DIRECT DEBIT');
+
+INSERT INTO supplier_payments (supplier_payment_id, amount_paid, payment_date, payment_type)
+VALUES (seq_supplier_payment.NEXTVAL, 12000, '03-JAN-2012', 'DIRECT DEBIT');
+
+INSERT INTO supplier_payments (supplier_payment_id, amount_paid, payment_date, payment_type)
+VALUES (seq_supplier_payment.NEXTVAL, 3000, '25-NOV-2010', 'CHECK');
+
+INSERT INTO supplier_payments (supplier_payment_id, amount_paid, payment_date, payment_type)
+VALUES (seq_supplier_payment.NEXTVAL, 34000, '30-APR-2013', 'DIRECT DEBIT');
+
+INSERT INTO supplier_payments (supplier_payment_id, amount_paid, payment_date, payment_type)
+VALUES (seq_supplier_payment.NEXTVAL, 8000, '17-SEP-2013', 'DIRECT DEBIT');
+
+
+------------ CUSTOMER PAYMENTS -------------
+
+INSERT INTO customer_payments (customer_id, payment_id)
+VALUES (10000, 10000);
+
+INSERT INTO customer_payments (customer_id, payment_id)
+VALUES (10001, 10001);
+
+INSERT INTO customer_payments (customer_id, payment_id)
+VALUES (10002, 10002);
+
+INSERT INTO customer_payments (customer_id, payment_id)
+VALUES (10003, 10003);
+
+INSERT INTO customer_payments (customer_id, payment_id)
+VALUES (10004, 10004);
+
+
+------------ CUSTOMER ORDERS -------------
+
+INSERT INTO customer_orders (order_id, customer_id, staff_id, order_date)
+VALUES (seq_customer_order.NEXTVAL, 10000, 10001, '13-JAN-2014' );
+
+INSERT INTO customer_orders (order_id, customer_id, staff_id, order_date)
+VALUES (seq_customer_order.NEXTVAL, 10001, 10002, '24-MAR-2011' );
+
+INSERT INTO customer_orders (order_id, customer_id, staff_id, order_date)
+VALUES (seq_customer_order.NEXTVAL, 10002, 10001, '02-FEB-2012' );
+
+INSERT INTO customer_orders (order_id, customer_id, staff_id, order_date)
+VALUES (seq_customer_order.NEXTVAL, 10003, 10003, '23-OCT-2014' );
+
+INSERT INTO customer_orders (order_id, customer_id, staff_id, order_date)
+VALUES (seq_customer_order.NEXTVAL, 10004, 10000, '31-DEC-2013' );
+
+
+------------ CUSTOMER INVOICES -------------
+
+INSERT INTO customer_invoices (customer_invoice_id, customer_id, payment_id, invoice_date)
+VALUES (seq_customer_invoice.NEXTVAL, 10000, 10000, '13-JAN-2014');
+
+INSERT INTO customer_invoices (customer_invoice_id, customer_id, payment_id, invoice_date)
+VALUES (seq_customer_invoice.NEXTVAL, 10001, 10001, '24-MAR-2011');
+
+INSERT INTO customer_invoices (customer_invoice_id, customer_id, payment_id, invoice_date)
+VALUES (seq_customer_invoice.NEXTVAL, 10002, 10002, '02-FEB-2012');
+
+INSERT INTO customer_invoices (customer_invoice_id, customer_id, payment_id, invoice_date)
+VALUES (seq_customer_invoice.NEXTVAL, 10003, 10003, '23-OCT-2014');
+
+INSERT INTO customer_invoices (customer_invoice_id, customer_id, payment_id, invoice_date)
+VALUES (seq_customer_invoice.NEXTVAL, 10004, 10004, '31-DEC-2013');
+
+
+------------ SUPPLIER ORDERS -------------
+
+INSERT INTO supplier_orders (supplier_order_id, supplier_id, order_date)
+VALUES (seq_supplier_order.NEXTVAL, 10001, '12-JUN-2014');
+
+INSERT INTO supplier_orders (supplier_order_id, supplier_id, order_date)
+VALUES (seq_supplier_order.NEXTVAL, 10004, '17-SEP-2012');
+
+INSERT INTO supplier_orders (supplier_order_id, supplier_id, order_date)
+VALUES (seq_supplier_order.NEXTVAL, 10003, '30-APR-2010');
+
+INSERT INTO supplier_orders (supplier_order_id, supplier_id, order_date)
+VALUES (seq_supplier_order.NEXTVAL, 10002, '26-DEC-2014');
+
+INSERT INTO supplier_orders (supplier_order_id, supplier_id, order_date)
+VALUES (seq_supplier_order.NEXTVAL, 10000, '03-AUG-2013');
+
+
+------------ SUPPLIER INVOICES -------------
+
+INSERT INTO supplier_invoices (supplier_invoice_id, supplier_payment_id, invoice_date)
+VALUES (seq_supplier_invoice.NEXTVAL, 10000, '12-JUN-2014');
+
+INSERT INTO supplier_invoices (supplier_invoice_id, supplier_payment_id, invoice_date)
+VALUES (seq_supplier_invoice.NEXTVAL, 10001, '17-SEP-2012');
+
+INSERT INTO supplier_invoices (supplier_invoice_id, supplier_payment_id, invoice_date)
+VALUES (seq_supplier_invoice.NEXTVAL, 10004, '30-APR-2010');
+
+INSERT INTO supplier_invoices (supplier_invoice_id, supplier_payment_id, invoice_date)
+VALUES (seq_supplier_invoice.NEXTVAL, 10003, '26-DEC-2014');
+
+INSERT INTO supplier_invoices (supplier_invoice_id, supplier_payment_id, invoice_date)
+VALUES (seq_supplier_invoice.NEXTVAL, 10002, '03-AUG-2013');
+
+
+------------ SUPPLIER ORDERLINES -------------
+
+INSERT INTO supplier_orderlines (supplier_order_id, supplier_invoice_id, product_id)
+VALUES (10000, 10000, 10000);
+
+INSERT INTO supplier_orderlines (supplier_order_id, supplier_invoice_id, product_id)
+VALUES (10001, 10001, 10003);
+
+INSERT INTO supplier_orderlines (supplier_order_id, supplier_invoice_id, product_id)
+VALUES (10002, 10002, 10001);
+
+INSERT INTO supplier_orderlines (supplier_order_id, supplier_invoice_id, product_id)
+VALUES (10003, 10003, 10002);
+
+INSERT INTO supplier_orderlines (supplier_order_id, supplier_invoice_id, product_id)
+VALUES (10004, 10004, 10001);
+
+
+------------ CUSTOMER ORDERLINES -------------
+
+INSERT INTO customer_orderlines (order_id, customer_invoice_id, product_id)
+VALUES (10000, 10000, 10000);
+
+INSERT INTO customer_orderlines (order_id, customer_invoice_id, product_id)
+VALUES (10001, 10001, 10001);
+
+INSERT INTO customer_orderlines (order_id, customer_invoice_id, product_id)
+VALUES (10002, 10002, 10002);
+
+INSERT INTO customer_orderlines (order_id, customer_invoice_id, product_id)
+VALUES (10003, 10003, 10003);
+
+INSERT INTO customer_orderlines (order_id, customer_invoice_id, product_id)
+VALUES (10004, 10004, 10004);

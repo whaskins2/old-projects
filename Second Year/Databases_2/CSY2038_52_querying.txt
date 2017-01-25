@@ -1,0 +1,57 @@
+-- Rubbish method
+SELECT site_id, state_ref
+FROM sites;
+
+--Better Method
+SELECT DEREF (state_ref), site_id
+FROM sites s;
+
+--Best Method
+SELECT site_id, s.state_ref.state, s.state_ref.country
+FROM sites s
+WHERE s.state_ref.state = 'BIHAR';
+
+DESC sites;
+
+SELECT site_id, address
+FROM sites;
+
+DESC address_type;
+
+SELECT site_id, s.address.street
+FROM sites s
+WHERE s.address.street = '343 ELM STREET';
+
+DESC sites;
+
+SELECT site_id, classroom
+FROM sites;
+
+DESC classroom_type;
+
+SELECT site_id, c.room_number, c.capacity, c.description
+FROM sites s,
+TABLE(s.classroom) c
+WHERE site_id = 55;
+
+SELECT site_id, c.room_number, c.capacity, c.description
+FROM sites s,
+TABLE(s.classroom) c
+WHERE site_id = 1;
+
+DESC invoices;
+
+SELECT invoice_number, invoice_item
+FROM invoices;
+
+DESC invoice_item_table_type;
+
+SELECT invoice_number, ii.student_surname, ii.course_title, ii.start_date, ii.end_date, ii.amount
+FROM invoices i,
+TABLE(i.invoice_item) ii;
+
+SELECT VALUE(i)
+FROM THE(
+SELECT invoice_item
+FROM invoices) i
+WHERE i.student_surname = 'GREEN';

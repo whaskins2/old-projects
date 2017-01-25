@@ -1,0 +1,49 @@
+SELECT title, surname, firstname
+WHERE title='MR';
+
+SELECT staff_id, p.firstname, p.town, office_id, o.name, o.location
+FROM people p, offices o;
+or
+SELECT staff_id, firstname, town, office_id, name, location
+FROM people, offices;
+
+SELECT staff_id, firstname, town
+FROM offices
+UNION
+SELECT office_id, firstname, location
+FROM people;
+
+SELECT town
+FROM people
+INTERSECT
+SELECT location
+FROM offices;
+
+SELECT town
+FROM people
+MINUS
+SELECT location
+FROM offices;
+
+Which type of query limits the number of columns, where do you specify this?
+projection
+
+Which type of query limits the number of rows, where do you specify this?
+Restriction
+
+Where does the term Cartesian Product come from?
+Mathematics
+
+How many columns should appear in the second statement of an intersect?
+Same as in the first statement? Atleast two?
+
+What is the order of key words in a standard query?
+SELECT
+FROM
+WHERE;
+What are the two rules for union, intersect and minus?
+same number of columns, same datatype, at least two statements
+If the first and second statements have 3 columns, how many are shown in the result set?
+3
+What happens to the result set of a query when you log off?
+deleted

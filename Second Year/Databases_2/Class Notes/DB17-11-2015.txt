@@ -1,0 +1,40 @@
+Where do you specify aliases?
+FROM 
+
+What is the wildcard symbol used in SQL?
+% and _
+
+What is the keyword used to remove duplicates with COUNT?
+DISTINCT
+
+What are the keywords and symbols used to look for items that aren't exact matches?
+LIKE % or _
+
+Name 5 statistical functions?
+MAX, AVG, MIN, SUM, COUNT
+
+What is the SELECT syntax to return the maximum cost of a column called cost?
+SELECT MAX(column) FROM tablename;
+
+What is a synonym for ANY?
+SOME
+
+SELECT surname, salary, contact_number, staff_id
+FROM staff
+WHERE surname BETWEEN 'A%' AND 'F%'
+AND salary BETWEEN  8 AND 10
+AND contact_number = '0303030'
+OR contact_number = '838383838';
+
+SELECT count(staff_id)
+FROM staff
+WHERE town = 'BEDFORD';
+
+SELECT SUM(balance), gender
+FROM staff
+GROUP BY gender;
+
+SELECT SUM(balance), gender
+FROM staff
+GROUP BY gender
+HAVING SUM(balance)>199;

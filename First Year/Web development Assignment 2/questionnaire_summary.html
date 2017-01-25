@@ -1,0 +1,93 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Warren's Website</title>
+		<link rel="stylesheet" type="text/css" href="styles/styling.css" />
+	</head>
+	<body>
+		<div id="container">
+			<header>
+				<h3>Usability and Accessibility Quiz</h3>
+			</header>
+			<div id="content">
+				<div id="walloftext">
+					<h1 class="contentheader">Quiz Summary</h1>
+					<div class="subheading">Congratulations on completing the quiz!</div><br>
+					<div id="scoreDisplay"> where's my score? </div><br>
+					<div id="corrections"></div>
+					<p id="ansheading"></p>
+					<div id="answersHere"></div><br>
+					<div class="buttonContainer">
+						<button id="retry" onClick="restart()">Retry</button><br><br><br><br>
+					</div>
+				</div>
+			</div>
+			<footer>
+				<p>Website created by Warren Haskins</p>
+				<p>Email:whaskins@hotmail.co.uk</p>
+			</footer>
+		</div>
+		<script>
+			qAnswerText = "";
+			cookieVal = document.cookie;
+			totalScore = 0;
+			
+			for (count = 0; count < 11; count++){
+				totalScore += Number(cookieVal.charAt(count));
+			}
+			
+			if(totalScore < 10){
+				if(totalScore == 9){
+					var cIntro = "The question you got wrong was:";
+				}else{
+					var cIntro = "The questions you got wrong were:";
+				}
+				var cQNumbers = " ";
+				for (tally = 0; tally < 10; tally++){
+					if(cookieVal.charAt(tally) == 0){
+						cQNumbers = cQNumbers + (tally + 1) + ", ";
+						qAnswer(tally + 1);
+					}
+				}
+				document.getElementById("corrections").innerHTML = cIntro + cQNumbers;
+				document.getElementById("ansheading").innerHTML = "Answers";
+			}
+			
+			document.getElementById("scoreDisplay").innerHTML = "Your score is " + totalScore + " out of 10.";
+			
+			var d = new Date();
+			var expires = "expires="+d.toUTCString();
+			document.cookie = "cookie=;" + expires;
+			
+			function restart(){
+				window.location.href="index.html"
+			}
+			
+			function qAnswer(qNumber){
+				if(qNumber == 1){
+					qAnswerText = qAnswerText + "Q1: Break down the information into smaller groups with appropriate subheadings where relevant. <br><br>";
+				}else if(qNumber == 2){
+					qAnswerText = qAnswerText + "Q2: Yes, relevant illustrations can help those that struggle with text alone. <br><br>";
+				}else if(qNumber == 3){
+					qAnswerText = qAnswerText + "Q3: A Supplemental text counterpart to any information found in the images. <br><br>";
+				}else if(qNumber == 4){
+					qAnswerText = qAnswerText + "Q4: Your website should be fully operatable solely via keyboard input. <br><br>";
+				}else if(qNumber == 5){
+					qAnswerText = qAnswerText + "Q5: Transcripts for audio content. + Text form accompaniment for any information presented in images.<br><br>";
+				}else if(qNumber == 6){
+					qAnswerText = qAnswerText + "Q6: You should avoid displaying anything that flashes three or more times a second. <br><br>";
+				}else if(qNumber == 7){
+					qAnswerText = qAnswerText + "Q7: Make sure your tags are correct and closed, don't give your elements duplicate attributes and use proper nesting. <br><br>";
+				}else if(qNumber == 8){
+					qAnswerText = qAnswerText + "Q8: Use clear colour contrast to ensure the text is always readable but avoid using too many strong contrasting colours. <br><br>";
+				}else if(qNumber == 9){
+					qAnswerText = qAnswerText + "Q9: By using clear headings and an intuitive site layout. + By ensuring the keyboard current focus is clearly visible. <br><br>";
+				}else if(qNumber == 10){
+					qAnswerText = qAnswerText + "Q10: You should provide the user with immediate feedback to let them know their commands have been successfully registered. <br><br>";
+				}
+				document.getElementById("answersHere").innerHTML = qAnswerText;
+			}
+		</script>
+	</body>
+</html>

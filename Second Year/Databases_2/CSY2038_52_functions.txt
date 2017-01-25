@@ -1,0 +1,48 @@
+SELECT instructor_id, instructor_name, salary
+FROM instructors
+WHERE salary LIKE 2000
+OR
+salary LIKE 2500
+OR
+salary LIKE 3000;
+
+SELECT instructor_id, instructor_name
+FROM instructors
+WHERE instructor_name LIKE 'S%';
+
+SELECT instructor_id, instructor_name, salary
+FROM instructors
+WHERE salary BETWEEN 2000
+AND 2999;
+
+SELECT student_id, COUNT(evaluation)
+FROM attendance
+GROUP BY student_id
+HAVING student_id > 6000;
+
+SELECT student_id, COUNT(evaluation)
+FROM attendance
+GROUP BY student_id
+HAVING student_id > 6000
+AND AVG(evaluation) > 3;
+
+SELECT student_id, COUNT(evaluation), SUM(amount_paid)
+FROM attendance
+GROUP BY student_id
+ORDER BY SUM(amount_paid);
+
+SELECT offering_id, SUM(amount_paid)
+FROM attendance
+GROUP BY offering_id
+ORDER BY SUM(amount_paid) DESC;
+
+SELECT offering_id, MIN(evaluation), MAX(evaluation), AVG(evaluation)
+FROM attendance
+GROUP BY offering_id
+HAVING MIN(evaluation) < 2.5
+ORDER BY offering_id;
+
+SELECT MAX(SUM(amount_paid))
+FROM attendance
+GROUP BY offering_id
+ORDER BY SUM(amount_paid) DESC;

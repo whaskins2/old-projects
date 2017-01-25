@@ -1,0 +1,47 @@
+SET SERVEROUTPUT ON
+
+CREATE OR REPLACE PROCEDURE cur_prac (in_location sites.location%TYPE) IS
+
+BEGIN
+
+	DELETE FROM sites WHERE location = in_location;
+	IF SQL%FOUND THEN
+		DBMS_OUTPUT.PUT_LINE(in_location || ' deleted');
+	ELSE
+		DBMS_OUTPUT.PUT_LINE(in_location || ' not found');
+	END IF;
+END cur_prac;
+/
+
+INSERT INTO sites(site_id, location)
+VALUES (999999, 'location');
+
+EXECUTE cur_prac('location');
+EXECUTE cur_prac('timbuktu');
+
+CREATE OR REPLACE PROCEDURE proc_exp_cursor (in_cost courses.cost%TYPE)IS
+	vc_anyfound BOOLEAN := false;
+	vc_rowcount NUMBER;
+	CURSOR find_courses IS
+	SELECT course_id, title, cost
+	FROM courses
+	WHERE cost > in_cost;
+
+BEGIN
+	DBMS_OUTPUT.PUT_LINE('Courses with a cost above ' || in_cost);
+	
+	FOR rec_courses IN find_courses LOOP
+		vc_anyfound := TRUE;
+		DBMS_OUTPUT.PUT_LINE(rec_courses.course_id || ' ' || rec_courses.title || ' ' || rec_courses.cost);
+		vc_rowcount := find_courses%ROWCOUNT;
+	END LOOP;
+	
+	IF vc_anyfound = FALSE THEN
+		DBMS_OUTPUT.PUT_LINE('none');
+	END IF;
+	DBMS_OUTPUT.PUT_LINE(vc_rowcount);
+END proc_exp_cursor;
+/
+SHOW ERRORS;
+
+EXECUTE proc_exp_cursor(1900);

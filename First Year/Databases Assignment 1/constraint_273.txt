@@ -1,0 +1,203 @@
+﻿-- Warren Haskins 14438496, Robert Paton 14414702, Daniel Simpson 14411184, Seb Tevendale 14411145, GROUP 26
+
+-- RunCommand @X:\Databases\Assignment_1\constraint_273.txt
+
+----------- PRIMARY KEYS ------------
+
+ALTER TABLE customers
+ADD CONSTRAINT pk_customer_id
+PRIMARY KEY (customer_id);
+
+ALTER TABLE sales_staff
+ADD CONSTRAINT pk_staff_id
+PRIMARY KEY (staff_id);
+
+ALTER TABLE payments
+ADD CONSTRAINT pk_payment_id
+PRIMARY KEY (payment_id);
+
+ALTER TABLE products
+ADD CONSTRAINT pk_product_id
+PRIMARY KEY (product_id);
+
+ALTER TABLE suppliers
+ADD CONSTRAINT pk_supplier_id
+PRIMARY KEY (supplier_id);
+
+ALTER TABLE supplier_payments
+ADD CONSTRAINT pk_supplier_payment_id
+PRIMARY KEY (supplier_payment_id);
+
+ALTER TABLE customer_payments
+ADD CONSTRAINT pk_customer_payments
+PRIMARY KEY (customer_id, payment_id);
+
+ALTER TABLE customer_orders
+ADD CONSTRAINT pk_customer_orders
+PRIMARY KEY (order_id);
+
+ALTER TABLE customer_invoices
+ADD CONSTRAINT pk_customer_invoice_id
+PRIMARY KEY (customer_invoice_id);
+
+ALTER TABLE supplier_orders
+ADD CONSTRAINT pk_supplier_order_id
+PRIMARY KEY (supplier_order_id);
+
+ALTER TABLE supplier_invoices
+ADD CONSTRAINT pk_supplier_invoices_id
+PRIMARY KEY (supplier_invoice_id);
+
+ALTER TABLE supplier_orderlines
+ADD CONSTRAINT pk_supplier_orderlines
+PRIMARY KEY (supplier_order_id, supplier_invoice_id, product_id); 
+
+ALTER TABLE customer_orderlines
+ADD CONSTRAINT pk_customer_orderlines
+PRIMARY KEY (order_id, customer_invoice_id, product_id);
+
+
+------------ FOREIGN KEYS -----------
+
+ALTER TABLE customer_payments
+ADD CONSTRAINT fk_cp_customer_id
+FOREIGN KEY (customer_id) 
+REFERENCES customers (customer_id);
+
+ALTER TABLE customer_payments
+ADD CONSTRAINT fk_cp_payment_id
+FOREIGN KEY (payment_id) 
+REFERENCES payments (payment_id);
+
+ALTER TABLE customer_orders
+ADD CONSTRAINT fk_co_customer_id
+FOREIGN KEY (customer_id) 
+REFERENCES customers (customer_id);
+
+ALTER TABLE customer_orders
+ADD CONSTRAINT fk_co_staff_id
+FOREIGN KEY (staff_id) 
+REFERENCES sales_staff (staff_id);
+
+ALTER TABLE customer_invoices
+ADD CONSTRAINT fk_customer_invoices
+FOREIGN KEY (customer_id, payment_id) 
+REFERENCES customer_payments (customer_id, payment_id);
+
+ALTER TABLE supplier_orders
+ADD CONSTRAINT fk_supplier_orders
+FOREIGN KEY (supplier_id) 
+REFERENCES suppliers (supplier_id);
+
+ALTER TABLE supplier_invoices
+ADD CONSTRAINT fk_supplier_invoices
+FOREIGN KEY (supplier_payment_id) 
+REFERENCES supplier_payments (supplier_payment_id);
+
+ALTER TABLE supplier_orderlines
+ADD CONSTRAINT fk_sol_supplier_order_id
+FOREIGN KEY (supplier_order_id)
+REFERENCES supplier_orders (supplier_order_id);
+
+ALTER TABLE supplier_orderlines
+ADD CONSTRAINT fk_sol_supplier_invoice_id
+FOREIGN KEY (supplier_invoice_id)
+REFERENCES supplier_invoices (supplier_invoice_id);
+
+ALTER TABLE supplier_orderlines
+ADD CONSTRAINT fk_sol_product_id
+FOREIGN KEY (product_id)
+REFERENCES products (product_id);
+
+ALTER TABLE customer_orderlines
+ADD CONSTRAINT fk_col_order_id
+FOREIGN KEY (order_id)
+REFERENCES customer_orders (order_id);
+
+ALTER TABLE customer_orderlines
+ADD CONSTRAINT fk_col_customer_invoice_id
+FOREIGN KEY (customer_invoice_id)
+REFERENCES customer_invoices (customer_invoice_id);
+
+ALTER TABLE customer_orderlines
+ADD CONSTRAINT fk_col_product_id
+FOREIGN KEY (product_id)
+REFERENCES products (product_id);
+
+------------ CHECK CONSTRAINTS -----------
+
+ALTER TABLE customers
+ADD CONSTRAINT ck_customers_title
+CHECK (title IN('MRS', 'MR', 'MISS', 'DR'));
+
+ALTER TABLE customers
+ADD CONSTRAINT ck_customers_fname
+CHECK(customer_firstname = upper(customer_firstname));
+
+ALTER TABLE customers
+ADD CONSTRAINT ck_customers_lname
+CHECK(customer_lastname = upper(customer_lastname));
+
+ALTER TABLE customers
+ADD CONSTRAINT ck_customers_gender
+CHECK (gender IN('M','F'));
+
+ALTER TABLE sales_staff
+ADD CONSTRAINT ck_staff_title
+CHECK (title IN('MRS', 'MR', 'MISS', 'DR'));
+
+ALTER TABLE sales_staff
+ADD CONSTRAINT ck_staff_fname
+CHECK(staff_firstname = upper(staff_firstname));
+
+ALTER TABLE sales_staff
+ADD CONSTRAINT ck_staff_lname
+CHECK(staff_lastname = upper(staff_lastname));
+
+ALTER TABLE sales_staff
+ADD CONSTRAINT ck_staff_gender
+CHECK (gender IN('M','F'));
+
+ALTER TABLE suppliers
+ADD CONSTRAINT ck_company_name
+CHECK (company_name = upper(company_name));
+
+------------ UNIQUE CONSTRAINTS -----------
+
+ALTER TABLE customers
+ADD CONSTRAINT u_customer_email
+UNIQUE (email);
+
+ALTER TABLE sales_staff
+ADD CONSTRAINT u_staff_email
+UNIQUE (email);
+
+ALTER TABLE suppliers
+ADD CONSTRAINT u_supplier_email
+UNIQUE (email);
+
+ALTER TABLE suppliers
+ADD CONSTRAINT u_supplier_contact_number
+UNIQUE (contact_number);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
