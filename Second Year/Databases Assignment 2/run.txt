@@ -1,0 +1,25 @@
+--@C:/run.txt;
+
+--Create Tables--
+@C:/creates.txt;
+
+--Alter Tables--
+@C:/alters.txt;
+
+--Insert Data--
+@C:/inserts.txt;
+
+--Add Functions--
+@C:/functions.txt;
+
+--Add Triggers--
+@C:/triggers.txt;
+
+--Add Procedures--
+@C:/procedures.txt;
+
+--Add Queries--
+@C:/queries.txt;
+
+--Drop Everything--
+--@C:/drop.txt;

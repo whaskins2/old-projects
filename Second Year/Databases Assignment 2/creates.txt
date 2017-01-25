@@ -1,0 +1,86 @@
+--@C:/creates.txt
+-----------------------------------------------------------
+--Create Types---------------------------------------------
+
+CREATE OR REPLACE TYPE venue_category_type AS OBJECT (
+name VARCHAR2(20),
+description VARCHAR2(500));
+/
+
+CREATE TYPE venue_category_table_type AS TABLE OF venue_category_type;
+/
+
+CREATE OR REPLACE TYPE address_type AS OBJECT (
+house VARCHAR2(10),
+street VARCHAR2(20),
+city VARCHAR2(20),
+postcode VARCHAR2(20),
+country VARCHAR2(20));
+/
+
+CREATE OR REPLACE TYPE room_type AS OBJECT (
+room_name VARCHAR2(20));
+/
+
+CREATE OR REPLACE TYPE room_varray_type AS VARRAY(500) OF room_type;
+/
+
+CREATE table addresses OF address_type;
+
+
+--Create Tables--------------------------------------------
+
+CREATE TABLE venues (
+venue_id NUMBER(5),
+category venue_category_table_type,
+address REF address_type SCOPE IS addresses,
+room room_varray_type,
+name VARCHAR2(25))
+NESTED TABLE category STORE AS venue_category_table;
+
+CREATE TABLE provisions (
+provision_id NUMBER(5),
+provision_name VARCHAR2(20));
+
+CREATE TABLE venue_provisions (
+provision_id NUMBER(5),
+venue_id NUMBER(5),
+availability CHAR);
+
+CREATE TABLE reviews (
+review_id NUMBER(5),
+venue_id NUMBER(5),
+reviewer_id NUMBER(5),
+vp_id NUMBER(5),
+provision_id NUMBER(5),
+visit_date DATE,
+review_date DATE,
+description VARCHAR2(200),
+rating NUMBER(1));
+
+CREATE TABLE reviewers (
+reviewer_id NUMBER(5),
+username VARCHAR2(20),
+password VARCHAR2(20),
+firstname VARCHAR2(20),
+surname VARCHAR2(20),
+address address_type,
+dob DATE);
+
+--Sequences--------------------------------------
+
+CREATE SEQUENCE seq_venue
+INCREMENT BY 1
+START WITH 10000;
+
+CREATE SEQUENCE seq_provision
+INCREMENT BY 1
+START WITH 00001;
+
+CREATE SEQUENCE seq_review
+INCREMENT BY 1
+START WITH 20000;
+
+CREATE SEQUENCE seq_reviewer
+INCREMENT BY 1
+START WITH 30000;

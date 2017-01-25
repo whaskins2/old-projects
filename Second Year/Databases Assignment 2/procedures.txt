@@ -1,0 +1,218 @@
+--@C:/procedures.txt
+-----------------------------------------------------------
+--Procedures-----------------------------------------
+
+SET SERVEROUTPUT ON
+
+--Work out reviewers’ age using date function
+CREATE OR REPLACE PROCEDURE proc_reviewer_age (in_username reviewers.username%TYPE)
+IS
+	vd_dob DATE;
+	vn_date_diff NUMBER(10);
+BEGIN	
+	SELECT dob
+	INTO vd_dob
+	FROM reviewers
+	WHERE username=in_username;
+	
+	vn_date_diff:=func_date_ct(vd_dob)/365;
+	DBMS_OUTPUT.PUT_LINE('The reviewer ' || in_username || ' is ' || vn_date_diff || ' years old');
+
+END proc_reviewer_age;
+/
+
+--Last visit date, work out days since last visit using the date function
+CREATE OR REPLACE PROCEDURE proc_last_visit (in_review_id reviews.review_id%TYPE)
+IS
+	vd_visit_date DATE;
+	vn_date_diff NUMBER(4);
+BEGIN 
+	SELECT visit_date
+	INTO vd_visit_date
+	FROM reviews
+	WHERE review_id=in_review_id;
+	
+	vn_date_diff:=func_date_ct(vd_visit_date);
+	DBMS_OUTPUT.PUT_LINE('It has been ' || vn_date_diff || ' since last visit');
+	
+END proc_last_visit;
+/
+
+
+--To find reviews above a certain rating and display results
+CREATE OR REPLACE PROCEDURE proc_rating_cursor (in_rating reviews.rating%TYPE) is
+	vc_anyfound BOOLEAN := false;
+	vn_rowcount NUMBER;
+	
+	CURSOR search_rating IS
+	SELECT review_id, review_date, rating
+	FROM reviews
+	WHERE rating > in_rating;
+	
+BEGIN
+	DBMS_OUTPUT.PUT_LINE('Reviews with a rating above ' || in_rating);
+	
+	FOR rec_rating IN search_rating LOOP
+		vc_anyfound := TRUE;
+		DBMS_OUTPUT.PUT_LINE('Review ID: ' || rec_rating.review_id || ' Date: ' || rec_rating.review_date || ' Rating(Out of 5)' || rec_rating.rating);
+		vn_rowcount := search_rating%ROWCOUNT;
+	END LOOP;
+	
+	IF vc_anyfound = FALSE THEN
+		DBMS_OUTPUT.PUT_LINE('None');
+	END IF;
+	DBMS_OUTPUT.PUT_LINE('Number found:' || vn_rowcount);
+END proc_rating_cursor;
+/
+
+--To check if the name of a venue already exists
+CREATE OR REPLACE PROCEDURE proc_check_venue(vc_name VARCHAR2) IS
+	
+	vc_anyfound BOOLEAN := false;
+	
+	CURSOR cur_venue IS 
+	SELECT name
+	FROM venues;
+BEGIN
+	FOR rec_cur_venue IN cur_venue LOOP
+		
+		IF rec_cur_venue.name = vc_name
+		THEN
+			vc_anyfound := TRUE;
+		END IF;
+	END LOOP;
+	IF vc_anyfound = TRUE
+	THEN
+		DBMS_OUTPUT.PUT_LINE('Venue already exists');
+	ELSE
+		DBMS_OUTPUT.PUT_LINE('Venue doesnt exist');
+	END IF;
+END proc_check_venue;
+/
+
+--Procedure that lists a review based on the review id
+CREATE OR REPLACE PROCEDURE proc_list_review_cur (in_review_id reviews.review_id%TYPE) IS
+
+	vc_anyfound BOOLEAN := false;
+
+	CURSOR search_review IS
+	SELECT r.review_id, r.reviewer_id, r.review_date, r.rating, r.description, re.firstname, re.surname
+	FROM reviews r
+	FULL OUTER JOIN reviewers re
+	ON re.reviewer_id = r.reviewer_id
+	WHERE r.review_id = in_review_id;
+	
+BEGIN
+	
+	FOR rec_review IN search_review LOOP
+		vc_anyfound := TRUE;
+		
+		DBMS_OUTPUT.PUT_LINE('Name: ' || CONCAT(SUBSTR (rec_review.firstname, 1,1), '.' || (SUBSTR (rec_review.surname , 1))));
+		DBMS_OUTPUT.PUT_LINE('Date: ' || rec_review.review_date);
+		DBMS_OUTPUT.PUT_LINE('Rating(/5): ' || rec_review.rating);
+		DBMS_OUTPUT.PUT_LINE('Description: ' || rec_review.description);
+	END LOOP;
+	
+	IF vc_anyfound = FALSE THEN
+		DBMS_OUTPUT.PUT_LINE('No Matching Review');
+	END IF;
+	
+END proc_list_review_cur;
+/
+
+--List the provisions availability and the venue name
+CREATE OR REPLACE PROCEDURE availability_cur IS
+	
+	CURSOR search_prov IS
+	SELECT p.provision_id, p.provision_name, v.name, vp.availability
+	FROM provisions p
+	FULL OUTER JOIN venue_provisions vp
+	ON p.provision_id=vp.provision_id
+	INNER JOIN venues v 
+	ON vp.venue_id=v.venue_id;
+
+BEGIN
+	
+	FOR rec_prov IN search_prov LOOP 
+
+		DBMS_OUTPUT.PUT_LINE('Venue Name: ' || rec_prov.name);
+		DBMS_OUTPUT.PUT_LINE('Provision: ' || rec_prov.provision_name || ' Available: ' || rec_prov.availability);
+		DBMS_OUTPUT.PUT_LINE(CHR(5));
+		
+	END LOOP;
+
+END availability_cur;
+/
+
+CREATE OR REPLACE PROCEDURE proc_venue_rating IS
+
+	vn_average NUMBER(1);
+
+	CURSOR search_venues IS
+	SELECT name
+	FROM venues;
+	
+BEGIN
+	FOR rec_venue IN search_venues LOOP
+		vn_average := func_avg_rating(rec_venue.name);
+		DBMS_OUTPUT.PUT_LINE('Venue Name: ' || rec_venue.name || ', Rating is: ' || vn_average);
+		DBMS_OUTPUT.PUT_LINE(CHR(5));
+	END LOOP;
+END proc_venue_rating;
+/
+
+
+--Show everything from the venues table based on venue name (input)
+	
+CREATE OR REPLACE PROCEDURE proc_show_venue (in_venue_name venues.name%TYPE) IS
+	vn_adr_num VARCHAR2(10);
+	vn_adr_street VARCHAR2(20);
+	vn_adr_city VARCHAR2(20);
+	vn_adr_postcode VARCHAR2(20);
+	vn_adr_country VARCHAR2(20);
+	vn_rating NUMBER(1);
+	
+	CURSOR find_venue IS
+	SELECT venue_id
+	FROM venues
+	WHERE name LIKE in_venue_name;
+	
+	CURSOR cat_list IS
+	SELECT vi.name, vi.description
+	FROM venues v, TABLE(v.category) vi
+	WHERE v.name LIKE in_venue_name;
+	
+	CURSOR rooms_list IS
+	SELECT vr.room_name
+	FROM venues v, TABLE(v.room) vr
+	WHERE v.name LIKE in_venue_name;
+	
+BEGIN
+	FOR rec_venues IN find_venue LOOP
+		SELECT v.address.house, v.address.street, v.address.city, v.address.postcode, v.address.country
+		INTO vn_adr_num, vn_adr_street, vn_adr_city, vn_adr_postcode, vn_adr_country
+		FROM venues v
+		WHERE venue_id = rec_venues.venue_id;
+		
+		DBMS_OUTPUT.PUT_LINE('Venue ID: ' || rec_venues.venue_id);
+		DBMS_OUTPUT.PUT_LINE('Venue Name: ' || in_venue_name);
+		DBMS_OUTPUT.PUT_LINE('Categories: ');
+		FOR cats IN cat_list LOOP
+			DBMS_OUTPUT.PUT_LINE('Name: ' || cats.name);
+			DBMS_OUTPUT.PUT_LINE('Description: ' || cats.description);
+		END LOOP;
+		vn_rating := func_avg_rating(in_venue_name);
+		DBMS_OUTPUT.PUT_LINE('Average Rating: ' || vn_rating);
+		DBMS_OUTPUT.PUT_LINE('Address: ');
+		DBMS_OUTPUT.PUT_LINE('House: ' || vn_adr_num);
+		DBMS_OUTPUT.PUT_LINE('Street: ' || vn_adr_street);
+		DBMS_OUTPUT.PUT_LINE('City: ' || vn_adr_city);
+		DBMS_OUTPUT.PUT_LINE('Postcode: ' || vn_adr_postcode);
+		DBMS_OUTPUT.PUT_LINE('Country: ' || vn_adr_country);
+		DBMS_OUTPUT.PUT_LINE('Rooms: ');
+		FOR rooms IN rooms_list LOOP
+			DBMS_OUTPUT.PUT_LINE(rooms.room_name);
+		END LOOP;
+	END LOOP;
+END proc_show_venue;
+/

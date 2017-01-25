@@ -1,0 +1,103 @@
+--@C:/inserts.txt
+-----------------------------------------------------------
+--Inserts---------------------------------------
+
+INSERT INTO addresses(house, street, city, postcode, country)
+VALUES ('2a', 'MEADOW CLOSE', 'MILTON KEYNES', 'MK018SN', 'UK');
+INSERT INTO addresses(house, street, city, postcode, country)
+VALUES	('14', 'EVERGREEN TERRACE', 'SPRINGFIELD', 'SS7NI21', 'US');
+INSERT INTO addresses(house, street, city, postcode, country)
+VALUES	('666', 'ELM STREET', 'WOODSTOCK', 'WS666N2', 'US');
+INSERT INTO addresses(house, street, city, postcode, country)
+VALUES	('51', 'ALP CLOSE', 'NOTTINGHAM', 'NN42PO1', 'UK');
+INSERT INTO addresses(house, street, city, postcode, country)
+VALUES	('37b', 'OLD FORD END ROAD', 'BEDFORD', 'MK406KL', 'UK');
+INSERT INTO addresses(house, street, city, postcode, country)
+VALUES	('22', 'FREEHOLD STREET', 'NORTHAMPTON', 'NN26EW', 'UK');
+
+	
+INSERT INTO venues(venue_id, category, address, room, name)
+SELECT seq_venue.NEXTVAL, 
+venue_category_table_type(
+	venue_category_type	('STUDENT BAR', 'BAR FOR STUDENTS'),
+	venue_category_type('MEETING POINT', 'MEETINGS HELD HERE')),
+REF(a),
+room_varray_type
+	(room_type('X5'), room_type('X6'), room_type('X7')), 'STUDENT UNION'
+FROM addresses a
+WHERE postcode = 'MK018SN';
+
+INSERT INTO venues(venue_id, category, address, room, name)
+SELECT seq_venue.NEXTVAL, 
+venue_category_table_type(
+	venue_category_type('OPEN DAYS', 'PARK CAMPUS'),
+	venue_category_type('GYM', 'WEEKLY WORKOUTS!')),
+REF(a),
+	room_varray_type(room_type('CB7'), room_type('CB6'), room_type('CB5')), 'PARK CAMPUS'
+FROM addresses a
+WHERE postcode = 'NN42PO1';
+
+INSERT INTO venues(venue_id, category, address, room, name)
+SELECT seq_venue.NEXTVAL, 
+venue_category_table_type(
+	venue_category_type('SOCIAL EVENTS', 'STUDENT UNION'),
+	venue_category_type('SPORT SOCIETIES', 'SPORTS HALL')), 
+REF(a),
+	room_varray_type(room_type('JC5'), room_type('JC4'), room_type('JC3')), 'AVENUE CAMPUS'
+FROM addresses a
+WHERE postcode = 'NN26EW';
+
+
+INSERT INTO provisions(provision_id, provision_name)
+VALUES(seq_provision.NEXTVAL, 'BAR');
+INSERT INTO provisions(provision_id, provision_name)
+VALUES(seq_provision.NEXTVAL, 'UNI SHOP');
+INSERT INTO provisions(provision_id, provision_name)
+VALUES(seq_provision.NEXTVAL, 'CAFE');
+INSERT INTO provisions(provision_id, provision_name)
+VALUES(seq_provision.NEXTVAL, 'DISABLED PARKING');
+		
+		
+INSERT INTO venue_provisions(provision_id, venue_id, availability)
+VALUES(1, 10000, 'Y');
+INSERT INTO venue_provisions(provision_id, venue_id, availability)
+VALUES(2, 10001, 'N');
+INSERT INTO venue_provisions(provision_id, venue_id, availability)
+VALUES(3, 10002, 'Y');
+INSERT INTO venue_provisions(provision_id, venue_id, availability)
+VALUES(4, 10000, 'N');
+		
+
+INSERT INTO reviewers(reviewer_id, username, password, firstname, surname, address, dob)
+VALUES (seq_reviewer.NEXTVAL, 'ADMIN', 'PASSWORD', 'JOE', 'BLOGGS',
+address_type('24', 'QUEENS WAY', 'OXFORD', 'OX118NA', 'UK'),
+'21-JUN-1996');
+INSERT INTO reviewers(reviewer_id, username, password, firstname, surname, address, dob)
+VALUES(seq_reviewer.NEXTVAL, 'FRED123', 'PASSWORD', 'FRED', 'BLOGGS',
+		address_type('22', 'MELLOW STREET', 'SANDY', 'SD401NA', 'UK'),
+		'12-AUG-1980');
+INSERT INTO reviewers(reviewer_id, username, password, firstname, surname, address, dob)
+VALUES(seq_reviewer.NEXTVAL, 'SALAD37', 'PASSWORD123', 'THOMAS', 'BIBBS',
+		address_type('54a', 'HICKLING AVENUE', 'LONDON', 'LD105LG', 'UK'),
+		'26-FEB-1971');
+INSERT INTO reviewers(reviewer_id, username, password, firstname, surname, address, dob)
+VALUES(seq_reviewer.NEXTVAL, 'USERNAME321', 'QWERTY', 'JIM', 'BRAID',
+		address_type('9', 'HEUSTON WAY', 'CALIFORNIA', 'CL1BK5K', 'US'),
+		'17-SEP-2000');
+		
+
+INSERT INTO reviews(review_id, vp_id, venue_id, reviewer_id, provision_id, visit_date, review_date, description, rating)
+VALUES(seq_review.NEXTVAL, 10000, 10000, 30000, 1, '20-NOV-2014', '27-DEC-2015', 'BEST VENUE THAT I HAVE BEEN TO IN THE AREA', 4);
+INSERT INTO reviews(review_id, vp_id, venue_id, reviewer_id, provision_id, visit_date, review_date, description, rating)
+VALUES(seq_review.NEXTVAL, 10001, 10001, 30001, 2, '05-NOV-2013', '12-NOV-2013', 'NOT AS GOOD AS ADVERTISED', 2);
+INSERT INTO reviews(review_id, vp_id, venue_id, reviewer_id, provision_id, visit_date, review_date, description, rating)
+VALUES(seq_review.NEXTVAL, 10002, 10002, 30002, 3, '25-DEC-2015', '30-DEC-2015', 'EXPENSIVE BUT WORTH EVERY PENNY', 5);
+INSERT INTO reviews(review_id, vp_id, venue_id, reviewer_id, provision_id, visit_date, review_date, description, rating)
+VALUES(seq_review.NEXTVAL, 10000, 10000, 30001, 4, '21-JAN-2016', '22-JAN-2016', 'DISAPPOINTMENT THROUGHOUT', 1);
+INSERT INTO reviews(review_id, vp_id, venue_id, reviewer_id, provision_id, visit_date, review_date, description, rating)
+VALUES(seq_review.NEXTVAL, 10000, 10000, 30002, 1, '02-MAR-2014', '02-APR-2014', 'NOT THE BEST BUT GOOD ENOUGH', 3);
+		
+		
+		
+
+

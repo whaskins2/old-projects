@@ -1,0 +1,53 @@
+--@C:/alters.txt
+-----------------------------------------------------------
+--Primary Keys---------------------------------------------
+ALTER TABLE venues 
+ADD CONSTRAINT pk_venues_id
+PRIMARY KEY(venue_id);
+
+ALTER TABLE provisions
+ADD CONSTRAINT pk_provision_id
+PRIMARY KEY(provision_id);
+
+ALTER TABLE reviews
+ADD CONSTRAINT pk_review_id
+PRIMARY KEY(review_id);
+
+ALTER TABLE reviewers
+ADD CONSTRAINT pk_reviwer_id
+PRIMARY KEY(reviewer_id);
+
+ALTER TABLE venue_provisions
+ADD CONSTRAINT pk_vp_id
+PRIMARY KEY(venue_id, provision_id);
+
+--Foreign Keys---------------------------------------------
+ALTER TABLE venue_provisions
+ADD CONSTRAINT fk_vp_venue_id
+FOREIGN KEY (venue_id)
+REFERENCES venues(venue_id);
+
+ALTER TABLE venue_provisions
+ADD CONSTRAINT fk_vp_provision_id
+FOREIGN KEY (provision_id)
+REFERENCES provisions(provision_id);
+
+ALTER TABLE reviews
+ADD CONSTRAINT fk_r_venue_id
+FOREIGN KEY (venue_id)
+REFERENCES venues(venue_id);
+
+ALTER TABLE reviews
+ADD CONSTRAINT fk_r_vp_id
+FOREIGN KEY (vp_id, provision_id)
+REFERENCES venue_provisions(venue_id, provision_id);
+
+ALTER TABLE reviews
+ADD CONSTRAINT fk_r_reviewer_id
+FOREIGN KEY (reviewer_id)
+REFERENCES reviewers(reviewer_id); 
+
+--Unique Constraints---------------------------------
+ALTER TABLE venues
+ADD CONSTRAINT u_venue_name
+UNIQUE(name);

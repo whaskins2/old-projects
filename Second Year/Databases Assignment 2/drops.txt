@@ -1,0 +1,63 @@
+--@C:/drops.txt
+-----------------------------------------------------------
+--Drops-----------------------------------------
+
+--DROP TRIGGERS--
+DROP TRIGGER trig_review;
+DROP TRIGGER trig_roomreq;
+
+--DROP TABLES--
+DROP TABLE addresses;
+DROP TABLE reviews;
+DROP TABLE reviewers;
+DROP TABLE venue_provisions;
+DROP TABLE provisions;
+DROP TABLE venues;
+
+--DROP TYPES--
+DROP TYPE room_varray_type;
+DROP TYPE room_type;
+DROP TYPE address_type;
+DROP TYPE venue_category_table_type;
+DROP TYPE venue_category_type;
+
+--DROP SEQUENCES--
+DROP SEQUENCE seq_venue;
+DROP SEQUENCE seq_provision;
+DROP SEQUENCE seq_reviewer;
+DROP SEQUENCE seq_review;
+
+--DROP PROCEDURES--
+DROP PROCEDURE proc_reviewer_age;
+DROP PROCEDURE proc_last_visit;
+
+--DROP QUERIES--
+DROP PROCEDURE proc_rating_cursor;
+DROP PROCEDURE proc_check_venue;
+DROP PROCEDURE proc_list_review_cur;
+DROP PROCEDURE availability_cur;
+DROP PROCEDURE proc_venue_rating;
+DROP PROCEDURE proc_show_venue;
+DROP PROCEDURE proc_show_rating;
+
+--DROP FUNCTIONS--
+DROP FUNCTION func_date_ct;
+DROP FUNCTION func_avg_rating;
+
+PURGE RECYCLEBIN;
+
+--PROVE NO FUNCTIONS REMAINS--
+SELECT * FROM all_objects WHERE object_type = 'FUNCTION' AND owner = 'CSY2038';
+
+--PROVE NO TRIGGERS REMAIN--
+SELECT description, trigger_body 
+FROM user_triggers;
+
+--PROVE NO TABLES REMAIN--
+select * from tab;
+
+--PROVE NO PROCEDURES REMAIN--
+SELECT object_name FROM user_procedures;
+
+--PROVE NO OBJECTS REMAINS--
+SELECT * FROM user_procedures;

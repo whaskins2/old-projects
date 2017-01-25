@@ -1,0 +1,63 @@
+-- Procedures
+
+--Work out reviewers’ age using date function
+EXEC proc_reviewer_age('ADMIN');
+
+--Last visit date, work out days since last visit using the date function
+EXEC proc_last_visit(20000);
+
+-- Triggers
+
+--Inserting/Updating/Deleting a review; when inserting the information from table is shown,
+--as well as when updating. When deleting, the piece of information you’re deleting is shown
+INSERT INTO reviews(review_id, vp_id, venue_id, reviewer_id, provision_id, visit_date, review_date, description, rating) 
+VALUES(99999, 10000, 10000, 30000, 1, '20-NOV-2014', '29-DEC-2015', 'Hello? This is the review', 1);
+
+UPDATE reviews 
+SET visit_date=sysdate
+WHERE review_id=99999;
+
+DELETE FROM reviews
+WHERE review_id=99999;
+
+
+--When adding a venue, a message is shown informing that a room needs to be added
+INSERT INTO venues(venue_id, category, address, name)
+SELECT 99999, 
+venue_category_table_type(
+	venue_category_type	('STUDENT BAR', 'BAR FOR STUDENTS'),
+	venue_category_type('MEETING POINT', 'MEETINGS HELD HERE')),
+REF(a),
+'STUDENT UNION2'
+FROM addresses a
+WHERE postcode = 'MK018SN';
+
+-- Delete 
+DELETE FROM venues
+WHERE venue_id=99999;
+
+-- Queries
+
+--To find reviews above or below a certain rating and display results
+EXEC proc_rating_cursor(3);
+
+--To check if the name of a venue already exists
+-- Exists
+EXEC proc_check_venue('STUDENT UNION');
+-- Doesn't Exist
+EXEC proc_check_venue('student bar');
+
+--Procedure that lists a review based on the review id
+EXEC proc_list_review_cur(20000);
+
+--List the provisions availability and the venue name
+EXEC availability_cur;
+
+--List venues by average reviews
+EXEC proc_venue_rating;
+
+--Show everything from the venues table based on venue name (input)
+EXECUTE proc_show_venue('STUDENT UNION');
+
+--Query to show Highest/Lowest Rating
+EXEC proc_show_rating;
